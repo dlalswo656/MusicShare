@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Music Share</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">MS<br><small>Music Share</small></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-5">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/#">오늘의 음악</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">음악 공유</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">음악 업로드</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Link</a></li>
+                        <li><a class="dropdown-item" href="#">Another link</a></li>
+                        <li><a class="dropdown-item" href="#">A third link</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Q&A</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">공지사항</a>
+                </li>
+
+                <!-- 관리자로 로그인 했을 때의 보여지는 회원 리스트 -->
+                <li class="nav-item" th:if="${session.LoginRole == 'Admin'}">
+                    <a class="nav-link" href="/Admin/UserList">회원 리스트</a>
+                    <ul>
+                        <li th:each="User : ${UserList}">
+                            <span th:text="${User.email}"></span>
+                        </li>
+                    </ul>
+                </li>
+                <!-- 관리자로 로그인 했을 때의 보여지는 회원 리스트 -->
+
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" style="width:250px;" placeholder="검색어 입력" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">검색</button>
+                    </form>
+                </li>
+
+                <!-- 로그인 전 -->
+                <li class="nav-item" th:if="${session.LoginRole == null}">
+                    <a class="nav-link" href="/Login">로그인</a>
+                </li>
+                <li class="nav-item" th:if="${session.LoginRole == null}">
+                    <a class="nav-link" href="/Join">회원가입</a>
+                </li>
+
+                <!-- User 로그인 후 -->
+                <li class="nav-item" th:if="${session.LoginRole == 'User'}">
+                    <a class="nav-link" th:href="@{/User/{id}(id=${session.LoginUser.id})}" style="font-size: 0.8rem;">
+                        <span th:text="${session.LoginUser.email}"></span>
+                    </a>
+                </li>
+
+                <!-- User 로그인 후 -->
+                <!--<li class="nav-item" th:if="${session.LoginRole == 'User'}">
+                    <a class="nav-link" th:href="@{/User/{id}(id=${session.LoginUser.id})}" th:text="${session.LoginUser.email}" style="font-size: 0.8rem;"></a>
+                </li> th:href와 th:text 같은 a 태그에 사용하면 th:href속성에 의해 th:text가 덮어쓰여지므로 span 태그를 써서 2개를 나눈다 -->
+
+                <!-- Admin 로그인 후 -->
+                <li class="nav-item" th:if="${session.LoginRole == 'Admin'}">
+                    <a class="nav-link" th:href="@{/User/{id}(id=${session.LoginUser.id})}" style="font-size: 0.8rem;">
+                        <span th:text="${session.LoginUser.email}"></span>
+                    </a>
+                </li>
+
+                <!-- 로그아웃 버튼 (세션 삭제) -->
+                <li class="nav-item" th:if="${session.LoginRole != null}">
+                    <a class="nav-link" href="/Logout">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
