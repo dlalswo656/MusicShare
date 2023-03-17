@@ -49,6 +49,7 @@ public class AdminController {
             session.invalidate(); // 세션무효화
             return "redirect:/";   // index페이지 리턴
         } else {
+
             System.out.println("예상외 예외발생");
             return "redirect:/";
         }
