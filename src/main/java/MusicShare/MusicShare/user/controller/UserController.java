@@ -6,6 +6,7 @@ import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.boot.Banner;
 import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class UserController {
         UserDTO LoginResult = userService.Login(userDTO);
         if(LoginResult != null) {
             // Login 성공 session 저장
+            session.setAttribute("LoginId", LoginResult.getId()); // pk 값 불러오기
             session.setAttribute("LoginUser", LoginResult); // 로그인 후에 유저의 id를 보이기 위해 추가
             session.setAttribute("LoginEmail", LoginResult.getEmail());
             session.setAttribute("LoginRole", LoginResult.getRole()); // 사용자의 역할 정보를 추가로 저장
@@ -110,10 +113,5 @@ public class UserController {
         System.out.println("userEmail = " + email);
         String checkResult = userService.emailCheck(email);
         return checkResult;
-//        if (checkResult != null) {
-//            return "ok";
-//        } else {
-//            return "no";
-//        }
     }
 }
