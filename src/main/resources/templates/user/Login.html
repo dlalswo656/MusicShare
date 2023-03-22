@@ -14,7 +14,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title text-center mb-4">로그인</h4>
-                    <form action="/User/Login" method="post">
+                    <form id="LoginChk" onsubmit="return submitChk()" action="/User/Login" method="post">
                         <div class="form-group mb-3">
                             <label for="email">이메일</label>
                             <input type="text" class="form-control" id="email" name="email"> <!--required-->
@@ -24,9 +24,13 @@
                             <input type="password" class="form-control" id="password" name="password"> <!--required-->
                         </div>
                         <div class="text-center">
-                        <button type="submit" class="btn btn-primary">로그인</button>
+                        <button type="submit" class="btn btn-primary btn-block" >로그인</button>
+                        </div>
+                        <div class="text-center mt-3">
                             <a href="/Join" class="btn btn-secondary">회원가입</a>
                             <a href="/index" class="btn btn-info">홈으로</a>
+                            <a class="btn btn-primary">이메일 찾기</a>
+                            <a class="btn btn-info">비밀번호 찾기</a>
                         </div>
                     </form>
                 </div>
@@ -44,4 +48,5 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
+<script type="text/javascript" th:src="@{/js/Login.js}"></script>
 </html>

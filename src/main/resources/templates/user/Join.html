@@ -25,29 +25,34 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h4 class="card-title text-center mb-4">회원가입</h4>
-                    <form id="IdPwCheck" onsubmit="submitChk()" action="/Login" method="post">
+                    <form onsubmit="submitChk()" action="/Login" method="post">
                         <div class="form-group mb-3">
                             <label for="email">이메일</label>
-                            <input type="id" class="form-control" id="email" name="email" tabindex="1" onblur="emailCheck()">
+                            <input type="email" class="form-control" id="email" name="email" onblur="emailCheck()">
                             <span id="check-result"></span>
+                            <div class="form-group mb-3">
+                                <label for="ChkEmail">이메일 인증</label>
+                                <input type="text" class="form-control" id="ChkEmail" name="ChkEmail">
+                                <button type="button" class="btn btn-primary mt-3" onclick="ChkEmail()">인증번호 보내기</button>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="password">비밀번호</label>
-                            <input type="password" class="form-control" id="password" name="password" tabindex="2"> <!--required-->
+                            <input type="password" class="form-control" id="password" name="password"> <!--required-->
                             <span id="passwordCheck"></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="pwchk">비밀번호 확인</label>
-                            <input type="password" class="form-control" id="pwchk" name="pwchk" tabindex="3"> <!--required-->
+                            <input type="password" class="form-control" id="pwchk" name="pwchk"> <!--required-->
                             <span id="pwCheck"></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="name">이름</label>
-                            <input type="text" class="form-control" id="name" name="name" tabindex="4"> <!--required-->
+                            <input type="text" class="form-control" id="name" name="name"> <!--required-->
                         </div>
                         <div class="form-group mb-3">
                             <label for="phone">전화번호</label>
-                            <input type="text" class="form-control" id="phone" name="phone" tabindex="5"> <!--required-->
+                            <input type="text" class="form-control" id="phone" name="phone"> <!--required-->
                         </div>
 
                         <!--                    관리자 회원가입 후 유저들이 선택 못하게 주석처리 함 -->

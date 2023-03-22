@@ -114,4 +114,5 @@ public class UserController {
         String checkResult = userService.emailCheck(email);
         return checkResult;
     }
+
 }
