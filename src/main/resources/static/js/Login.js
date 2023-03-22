@@ -16,6 +16,7 @@ function submitChk() {
         return;
     }
 
+
     // 로그인 성공 확인
     if (email.value !== "사용자 이메일") {
         alert("이메일 틀림");
