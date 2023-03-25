@@ -7,8 +7,11 @@ import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.context.support.BeanDefinitionDsl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -25,9 +28,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Repository
 public class UserController {
+
     // 생성자 주입
     private final UserService userService;
-
     private final UserRepository userRepository;
 
     // Home

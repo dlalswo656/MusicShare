@@ -8,6 +8,7 @@ async function emailCheck() {
 
 // 이메일이 공백일 경우
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 정규식 패턴 사용
+
     if (!emailRegex.test(email)) {
       checkResult.css("color", "red").text("이메일 형식이 유효하지 않습니다.");
       return;
@@ -19,7 +20,7 @@ async function emailCheck() {
         // 요청방식: post, url: "email-check", 데이터: 이메일
         type: "post",
         url: "/User/email-check",
-        data: { email },
+        data: {"email": email },
       });
       console.log("요청 성공", res);
       if (res === "ok") {
@@ -77,9 +78,8 @@ function submitChk() {
 
 // 회원가입 버튼 클릭 시 submitChk 함수 실행
     $("form").submit(function() {
+        console.log(header); // 디버깅
+        console.log(token);
       return submitChk();
     });
   });
-
-
-  // Login

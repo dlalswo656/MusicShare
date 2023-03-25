@@ -16,16 +16,4 @@ function submitChk() {
         return;
     }
 
-
-    // 로그인 성공 확인
-    if (email.value !== "사용자 이메일") {
-        alert("이메일 틀림");
-        return;
-    }
-
-    if (password.value !== "사용자 비밀번호") {
-        alert("비밀번호 틀림");
-        return;
-    }
-
 }

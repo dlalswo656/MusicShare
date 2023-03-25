@@ -30,6 +30,9 @@ dependencies {
 	// security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	// email
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	// mysql
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	// runtimeOnly 'mysql:mysql-connector-java'라이브러리 추가 안 되고 에러 뜸 해결 : 버전을 추가하면 됨 :8.0.28
