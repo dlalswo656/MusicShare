@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,14 @@ public class UserController {
         return "user/Join";
     }
 
+    // 회원가입 이메일 중복 체크
+    @PostMapping("/User/email-check")
+    public @ResponseBody String emailCheck(@RequestParam("email") String email) {
+        System.out.println("userEmail = " + email);
+        String checkResult = userService.emailCheck(email);
+        return checkResult;
+    }
+
     @PostMapping("/Login")
     public String Save(@ModelAttribute UserDTO userDTO, Model model) {
         // 회원가입 할 때 Role 값이 null 이면 User로 변환
@@ -72,6 +81,7 @@ public class UserController {
             session.setAttribute("LoginEmail", LoginResult.getEmail());
             session.setAttribute("LoginRole", LoginResult.getRole()); // 사용자의 역할 정보를 추가로 저장
            return "index";
+
 
         } else {
             // Login 실패
@@ -110,12 +120,7 @@ public class UserController {
         return "redirect:/"; // 메인 페이지로 리다이렉트
     }
 
-    // 이메일 중복 체크
-    @PostMapping("/User/email-check")
-    public @ResponseBody String emailCheck(@RequestParam("email") String email) {
-        System.out.println("userEmail = " + email);
-        String checkResult = userService.emailCheck(email);
-        return checkResult;
-    }
+
+
 
 }

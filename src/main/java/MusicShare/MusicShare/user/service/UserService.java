@@ -7,6 +7,7 @@ import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -40,10 +41,13 @@ public class UserService {
             2. DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는 지 판단
         */
         Optional<UserEntity> byEmail = userRepository.findByEmail(userDTO.getEmail());
+        PasswordEncoder passwordEncoder = securityConfig.passwordEncoder();
+
         if (byEmail.isPresent()) {
             // 조회 결과 있음(해당 이메일을 가진 회원 정보가 있다)
             UserEntity userEntity = byEmail.get();
-            if (userEntity.getPassword().equals(userDTO.getPassword())) {
+            // matches를 이용하여 암호화 된 비밀번호와 순수 비밀번호 비교
+            if (passwordEncoder.matches(userDTO.getPassword(), userEntity.getPassword())) {
                 // 비밀번호 일치
                 // entity -> dto 변환 후 리턴
                 UserDTO dto = UserDTO.toUserDTO(userEntity);

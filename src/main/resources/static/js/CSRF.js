@@ -6,5 +6,7 @@ $.ajaxSetup({
     xhr.setRequestHeader(header, token);
   }
 });
+
 console.log(header); // 디버깅
 console.log(token);
+
