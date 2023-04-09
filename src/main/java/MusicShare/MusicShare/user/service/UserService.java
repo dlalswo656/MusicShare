@@ -6,10 +6,11 @@ import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.catalina.User;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final SecurityConfig securityConfig;
 
+    // 로그인
     public void Save(UserDTO userDTO) {
         
         // 비밀번호 암호화
@@ -99,11 +101,14 @@ public class UserService {
     // 회원가입 엔티티를 가져오게 되면 그냥 update가 안 되고 insert 됨
     public void Update(UserDTO userDTO) {
 
+        // System.out.println("password" + userDTO.getPassword()); // 수정 패스워드
+
         // 내정보 수정 비밀번호 암호화
         PasswordEncoder passwordEncoder = securityConfig.passwordEncoder();
         String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
         userDTO.setPassword(encodedPassword);
 
+        // System.out.println("encoderPassword" + encodedPassword); // 수정 패스워드 암호화
         userRepository.save(UserEntity.toUpdateUserEntity(userDTO));
     }
 
@@ -121,6 +126,5 @@ public class UserService {
             return "ok";
         }
     }
-
 
 }

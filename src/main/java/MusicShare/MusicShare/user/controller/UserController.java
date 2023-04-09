@@ -1,29 +1,15 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.UserDTO;
-import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.UserRepository;
+import MusicShare.MusicShare.user.service.EmailService;
 import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.context.support.BeanDefinitionDsl;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,6 +19,7 @@ public class UserController {
     // 생성자 주입
     private final UserService userService;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     // Home
     @GetMapping("/index")
@@ -58,7 +45,7 @@ public class UserController {
     @PostMapping("/Login")
     public String Save(@ModelAttribute UserDTO userDTO, Model model) {
         // 회원가입 할 때 Role 값이 null 이면 User로 변환
-        if (userDTO.getRole() == null) { 
+        if (userDTO.getRole() == null) {
             userDTO.setRole("User");
         }
         userService.Save(userDTO);
@@ -69,7 +56,7 @@ public class UserController {
     public String LoginForm() {
         return "user/Login";
     }
-    
+
     // 로그인
     @PostMapping("/User/Login")
     public String Login(@ModelAttribute UserDTO userDTO, HttpSession session) {
@@ -82,14 +69,12 @@ public class UserController {
             session.setAttribute("LoginRole", LoginResult.getRole()); // 사용자의 역할 정보를 추가로 저장
            return "index";
 
-
         } else {
             // Login 실패
             return "user/Login";
         }
-
     }
-    
+
     // 마이페이지
     @GetMapping("/User/{id}")
     public String findById(@PathVariable Long id, Model model) {
@@ -97,7 +82,7 @@ public class UserController {
         model.addAttribute("User", userDTO);
         return "user/MyPage";
     }
-    
+
     // 내정보 수정
     @GetMapping("/User/Update")
     public String UpdateForm(HttpSession session, Model model) {
@@ -105,6 +90,7 @@ public class UserController {
         UserDTO userDTO = userService.UpdateForm(myEmail);
         model.addAttribute("UpdateUser", userDTO);
         return "user/Update";
+
     }
 
     @PostMapping("/User/Update")
@@ -113,14 +99,19 @@ public class UserController {
         return "redirect:/User/" + userDTO.getId();
     }
 
+    // 비밀번호 찾기 뷰 페이지
+    @GetMapping("/User/sendPw")
+    public String sendPw() {
+
+        return "user/ResetPw";
+    }
+
     // 로그아웃
     @GetMapping("/Logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 정보 삭제
         return "redirect:/"; // 메인 페이지로 리다이렉트
     }
-
-
 
 
 }

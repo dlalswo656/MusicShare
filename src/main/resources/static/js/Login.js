@@ -7,13 +7,12 @@ function submitChk() {
     if (!email.value) {
         alert ("이메일을 입력해주세요.");
         email.focus();
-        return;
-    }
-
-    if (!password.value) {
-        alert("비밀번호를 입력해주세요.");
+        return false;
+    } else if (!password.value) {
+        alert ("비밀번호를 입력해주세요.");
         password.focus();
-        return;
+        return false;
+    } else {
+        return submitChk;
     }
-
 }

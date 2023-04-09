@@ -13,15 +13,14 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: dlalswo656@gmail.com # 발신자 메일
-    password: zcvumzdippglzmfu # 구글 2단계 앱 비밀번호
+    password: zcvu mzdi ppgl zmfu # tkfkdrha1! 구글 2단계 앱 비밀번호
     properties:
       mail:
         smtp:
-          aurh: true
+          auth: true
           timeout: 5000
           starttls:
-            enabel: true
-
+            enable: true
 
   # mysql 연동
   datasource:

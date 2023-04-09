@@ -2,7 +2,6 @@ package MusicShare.MusicShare.user.dto;
 
 import MusicShare.MusicShare.user.entity.UserEntity;
 import lombok.*;
-import org.springframework.context.annotation.Role;
 
 @Getter
 @Setter
@@ -29,5 +28,6 @@ public class UserDTO {
         return userDTO;
 
     }
+
 
 }
