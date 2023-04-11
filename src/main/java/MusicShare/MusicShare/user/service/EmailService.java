@@ -1,9 +1,8 @@
 package MusicShare.MusicShare.user.service;
 
-import MusicShare.MusicShare.user.entity.UserEntity;
+import MusicShare.MusicShare.user.config.SecurityConfig;
 import MusicShare.MusicShare.user.repository.UserRepository;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
@@ -13,28 +12,26 @@ import java.util.Random;
 
 @Service
 @Repository
+@RequiredArgsConstructor
 public class EmailService {
 
     private final UserRepository userRepository;
     private final JavaMailSender javaMailSender;
+    private final SecurityConfig securityConfig;
 
-    @Autowired
-    public EmailService(JavaMailSender javaMailSender, UserRepository userRepository) {
-        this.javaMailSender = javaMailSender;
-        this.userRepository = userRepository;
-    }
 
     public String sendForgotPasswordEmail(String email) {
         String newPassword = generateNewPassword();
-        sendEmail(email, newPassword);
+        sendEmail(email, newPassword); // 이메일 전송
+
         return newPassword;
     }
 
     private void sendEmail(String email, String newPassword) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("새로운 비밀번호 발급");
-        message.setText("새로운 비밀번호는 " + newPassword + "입니다.");
+        message.setSubject("임시 비밀번호 발급");
+        message.setText("임시 비밀번호는 " + newPassword + "입니다.");
         javaMailSender.send(message);
     }
 
@@ -50,6 +47,7 @@ public class EmailService {
             char randomChar = characters.charAt(index);
             sb.append(randomChar);
         }
+
         return sb.toString();
     }
 

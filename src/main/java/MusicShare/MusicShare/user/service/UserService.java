@@ -6,11 +6,8 @@ import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +25,7 @@ public class UserService {
         PasswordEncoder passwordEncoder = securityConfig.passwordEncoder();
         String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
         userDTO.setPassword(encodedPassword);
+        System.out.println("encodedPassword : " + encodedPassword);
 
         // 1. dto -> entity 변환
         // 2. repository의 save 메서드 호출
@@ -48,14 +46,20 @@ public class UserService {
         if (byEmail.isPresent()) {
             // 조회 결과 있음(해당 이메일을 가진 회원 정보가 있다)
             UserEntity userEntity = byEmail.get();
+            System.out.println(""+ userDTO);
             // matches를 이용하여 암호화 된 비밀번호와 순수 비밀번호 비교
             if (passwordEncoder.matches(userDTO.getPassword(), userEntity.getPassword())) {
                 // 비밀번호 일치
                 // entity -> dto 변환 후 리턴
                 UserDTO dto = UserDTO.toUserDTO(userEntity);
+
+                // 임시 비밀번호
+                System.out.println("성공이야");
                 return dto;
             } else {
                 // 비밀번호 불일치(로그인 실패)
+                System.out.println("비밀번호"+userEntity.getPassword());
+                System.out.println("응 실패야 ~");
                 return null;
             }
         } else {
