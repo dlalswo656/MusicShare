@@ -40,12 +40,13 @@ function submitChk() {
     const email = $("#email").val();
     const password = $("#password").val();
     const pwchk = $("#pwchk").val();
+    const name = $("#name").val();
+    const phone = $("#phone").val();
     const checkResult = $("#check-result");
     const passwordCheck = $("#passwordCheck");
     const pwCheck = $("#pwCheck");
 
-
-// 이메일 중복 체크
+    // 이메일 중복 체크
     if (checkResult.text() !== "사용 가능한 이메일") {
       $("#email-check-msg").text("이메일 중복을 확인해주세요.").show();
       $("#email").select();
@@ -54,7 +55,7 @@ function submitChk() {
         $("#email-check-msg").hide(); // 경고 메시지 숨기기
     }
 
-// 비밀번호 확인
+    // 비밀번호 확인
     if (password === "") {
         passwordCheck.css("color", "red").text("비밀번호를 입력해주세요");
         // alert("비밀번호를 입력해주세요.");
@@ -65,11 +66,24 @@ function submitChk() {
         // alert("비밀번호가 일치하지 않습니다.");
         $("#pwchk").select();
         return false;
-      } else {
-        // 모든 조건을 만족하면 form 제출
-        return true;
-        }
       }
+
+    // 이름 유효성
+    if (name === "") {
+    name.css("color", "red").text("이름을 입력해주세요");
+    $("#name").select();
+    return false;
+    }
+    // 전화번호 유효성
+    if (phone === "") {
+    phone.css("color", "red").text("번호를 입력해주세요");
+    $("#phone").select();
+    return false;
+    }
+    // 모든 조건을 만족하면 form 제출
+    return true;
+    }
+
     $(document).ready(function() {
 // 이메일 blur 시 이메일 중복 체크 실행
     $("#email").blur(function() {

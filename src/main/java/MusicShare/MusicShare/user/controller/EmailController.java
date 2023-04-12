@@ -4,6 +4,7 @@ import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.EmailService;
 import MusicShare.MusicShare.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -13,18 +14,12 @@ import java.util.Optional;
 
 @RestController
 @Repository
+@RequiredArgsConstructor
 public class EmailController {
 
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final UserService userService;
-
-    @Autowired
-    public EmailController(EmailService emailService, UserService userService, UserRepository userRepository) {
-        this.emailService = emailService;
-        this.userService = userService;
-        this.userRepository = userRepository;
-    }
 
     @PostMapping("/forgot-password")
     public ResponseEntity<String> forgotPassword(@RequestParam("email") String email, HttpSession session) {

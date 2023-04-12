@@ -5,6 +5,7 @@ import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
@@ -24,7 +25,12 @@ public class EmailService {
         String newPassword = generateNewPassword();
         sendEmail(email, newPassword); // 이메일 전송
 
-        return newPassword;
+        // 암호화
+        PasswordEncoder passwordEncoder = securityConfig.passwordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+
+        return encodedPassword;
+        // return newPassword;
     }
 
     private void sendEmail(String email, String newPassword) {
