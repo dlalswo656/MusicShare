@@ -54,6 +54,7 @@ public class UserController {
 
     @GetMapping("/Login")
     public String LoginForm() {
+
         return "user/Login";
     }
 
@@ -112,6 +113,5 @@ public class UserController {
         session.invalidate(); // 세션 정보 삭제
         return "redirect:/"; // 메인 페이지로 리다이렉트
     }
-
 
 }

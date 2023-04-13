@@ -41,7 +41,9 @@ function submitChk() {
     const password = $("#password").val();
     const pwchk = $("#pwchk").val();
     const name = $("#name").val();
+    const nameChk = $("#nameChk");
     const phone = $("#phone").val();
+    const phoneChk = $("#phoneChk");
     const checkResult = $("#check-result");
     const passwordCheck = $("#passwordCheck");
     const pwCheck = $("#pwCheck");
@@ -70,13 +72,13 @@ function submitChk() {
 
     // 이름 유효성
     if (name === "") {
-    name.css("color", "red").text("이름을 입력해주세요");
+    nameChk.css("color", "red").text("이름을 입력해주세요");
     $("#name").select();
     return false;
     }
     // 전화번호 유효성
     if (phone === "") {
-    phone.css("color", "red").text("번호를 입력해주세요");
+    phoneChk.css("color", "red").text("번호를 입력해주세요");
     $("#phone").select();
     return false;
     }
