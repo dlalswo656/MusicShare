@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>음악 공유</title>
+    <th:block th:replace="inc/header"></th:block>
 </head>
 <body>
-
+<th:block th:replace="inc/body"></th:block>
+<form action="#" method="post">
+    <div class="container mt-5">
+        <table class="table mt-4">
+            <thead class="thead-light">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="todayMusic : ${todayMusicList}">
+                <td th:text="${todayMusic.id}"></td>
+                <td><a th:href="@{/TodayDetail(id=${todayMusic.id})}" th:text="${todayMusic.title}"></a></td>
+                <td th:text="${todayMusic.writer}"></td>
+                <td th:text="${#dates.format(todayMusic.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-5">
+        <a class="btn btn-primary" href="/TodayWrite">글작성</a>
+    </div>
+</form>
 </body>
 </html>

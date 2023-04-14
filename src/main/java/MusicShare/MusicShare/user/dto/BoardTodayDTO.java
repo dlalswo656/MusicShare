@@ -1,5 +1,6 @@
 package MusicShare.MusicShare.user.dto;
 
+import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,8 +13,20 @@ import java.time.LocalDateTime;
 public class BoardTodayDTO {
     private Long id;
     private String todayTitle;
+    private String todayContent;
     private String todayWriter;
     private int todayHits;
     private LocalDateTime todayCreatedTime;
+
+    public static BoardTodayDTO toBoardTodayDTO(BoardTodayEntity boardTodayEntity) {
+        BoardTodayDTO boardTodayDTO = new BoardTodayDTO();
+        boardTodayDTO.setId(boardTodayEntity.getId());
+        boardTodayDTO.setTodayTitle(boardTodayEntity.getTodayTitle());
+        boardTodayDTO.setTodayContent(boardTodayEntity.getTodayContent());
+        boardTodayDTO.setTodayWriter(boardTodayEntity.getTodayWriter());
+        boardTodayDTO.setTodayHits(boardTodayEntity.getTodayHits());
+
+        return boardTodayDTO;
+    }
 
 }

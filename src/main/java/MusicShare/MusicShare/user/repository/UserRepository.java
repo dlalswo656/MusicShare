@@ -2,7 +2,6 @@ package MusicShare.MusicShare.user.repository;
 
 import MusicShare.MusicShare.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
 
 //                                                      클래스     pk 값
