@@ -7,7 +7,7 @@
 </head>
 <body>
 <th:block th:replace="inc/body"></th:block>
-<form action="#" method="post">
+<form action="/Board/Today" method="post">
     <div class="container mt-5">
         <table class="table mt-4">
             <thead class="thead-light">
@@ -15,15 +15,20 @@
                 <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
+                <th>내용</th>
+                <th>조회수</th>
                 <th>등록일</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="todayMusic : ${todayMusicList}">
-                <td th:text="${todayMusic.id}"></td>
-                <td><a th:href="@{/TodayDetail(id=${todayMusic.id})}" th:text="${todayMusic.title}"></a></td>
-                <td th:text="${todayMusic.writer}"></td>
-                <td th:text="${#dates.format(todayMusic.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <tr th:each="boardTodayList: ${boardTodayList}">
+                <td><a th:href="@{|/Board/Today/${boardTodayList.id}|}" th:text="${boardTodayList.id}"></a></td>
+                <td><a th:text="${boardTodayList.todayTitle}"></a></td>
+                <td th:text="${session.LoginEmail}"></td>
+                <!--<td th:text="${boardTodayList.todayWriter}"></td>-->
+                <td th:text="${boardTodayList.todayContent}"></td>
+                <th th:text="${boardTodayList.todayHits}"></th>
+                <td th:text="${#temporals.format(boardTodayList.todayCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbody>
         </table>

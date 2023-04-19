@@ -17,6 +17,7 @@ public class BoardTodayDTO {
     private String todayWriter;
     private int todayHits;
     private LocalDateTime todayCreatedTime;
+    private LocalDateTime todayUpdatedTime;
 
     public static BoardTodayDTO toBoardTodayDTO(BoardTodayEntity boardTodayEntity) {
         BoardTodayDTO boardTodayDTO = new BoardTodayDTO();
@@ -25,7 +26,8 @@ public class BoardTodayDTO {
         boardTodayDTO.setTodayContent(boardTodayEntity.getTodayContent());
         boardTodayDTO.setTodayWriter(boardTodayEntity.getTodayWriter());
         boardTodayDTO.setTodayHits(boardTodayEntity.getTodayHits());
-
+        boardTodayDTO.setTodayCreatedTime(boardTodayEntity.getCreatedTime());
+        boardTodayDTO.setTodayUpdatedTime(boardTodayEntity.getUpdatedTime());
         return boardTodayDTO;
     }
 

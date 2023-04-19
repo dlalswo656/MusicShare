@@ -12,8 +12,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: dlalswo656@gmail.com # 발신자 메일
-    password: zcvu mzdi ppgl zmfu # tkfkdrha1! 구글 2단계 앱 비밀번호
+    username: dlalswotest # dlalswo656@gmail.com # 발신자 메일
+    password: xtkt wpya kphp kzuy # zcvu mzdi ppgl zmfu # tkfkdrha1! 구글 2단계 앱 비밀번호
     properties:
       mail:
         smtp:

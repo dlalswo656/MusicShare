@@ -19,7 +19,7 @@ public class BoardTodayEntity extends BaseEntity {
     @Column
     private String todayTitle;
 
-    @Column
+    @Column(length = 500)
     private String todayContent;
 
     @Column(length = 20, nullable = false) // 크기 20, not null
