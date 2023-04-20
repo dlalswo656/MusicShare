@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정</title>
+</head>
+<body>
+<form action="/Board/TodayUpdate" method="post" name="TodayUpdate">
+    <div class="container mt-5">
+        <table class="table mt-4">
+            <thead>
+                <input type="hidden" name="id" th:value="${todayUpdate.id}">
+                제목 : <input type="text" name="todayTitle" th:value="${todayUpdate.todayTitle}">
+                작성자 : <input type="text" name="todayWriter" th:value="${todayUpdate.todayWriter}">
+                내용 : <input type="text" name="todayContent" th:value="${todayUpdate.todayContent}">
+            </thead>
+        </table>
+    </div>
+</form>
+</body>
+</html>

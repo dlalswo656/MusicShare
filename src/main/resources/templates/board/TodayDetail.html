@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의 음악</title>
+    <th:block th:replace="inc/header"></th:block>
+</head>
+<body>
+<th:block th:replace="inc/body"></th:block>
+<div class="container mt-5">
+    <table class="table mt-4">
+        <thead class="thead-light">
+        <tr>
+            <th>번호</th>
+            <td th:text="${boardToday.id}"></td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td th:text="${boardToday.todayTitle}"></td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td th:text="${boardToday.todayWriter}"></td>
+        </tr>
+    <!--    <tr>
+            <th>Email</th>
+            <td th:text="${boardToday.LoginEmail}"></td>
+        </tr>-->
+        <tr>
+            <th>내용</th>
+            <td th:text="${boardToday.todayContent}"></td>
+        </tr>
+        <tr>
+            <th>조회수</th>
+            <td th:text="${boardToday.todayHits}"></td>
+        </tr>
+        <tr>
+            <th>등록일</th>
+            <td th:text="${boardToday.todayCreatedTime}"></td>
+        </tr>
+    </table>
+    <div>
+        <a class="btn btn-primary" href="/Board/TodayUpdate">글 수정</a>
+    </div>
+</div>
+</body>
+</html>

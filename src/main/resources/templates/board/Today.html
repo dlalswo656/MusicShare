@@ -23,9 +23,9 @@
             <tbody>
             <tr th:each="boardTodayList: ${boardTodayList}">
                 <td><a th:href="@{|/Board/Today/${boardTodayList.id}|}" th:text="${boardTodayList.id}"></a></td>
-                <td><a th:text="${boardTodayList.todayTitle}"></a></td>
-                <td th:text="${session.LoginEmail}"></td>
-                <!--<td th:text="${boardTodayList.todayWriter}"></td>-->
+                <td th:text="${boardTodayList.todayTitle}"></td>
+<!--                <td th:text="${session.LoginEmail}"></td>-->
+                <td th:text="${boardTodayList.todayWriter}"></td>
                 <td th:text="${boardTodayList.todayContent}"></td>
                 <th th:text="${boardTodayList.todayHits}"></th>
                 <td th:text="${#temporals.format(boardTodayList.todayCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
