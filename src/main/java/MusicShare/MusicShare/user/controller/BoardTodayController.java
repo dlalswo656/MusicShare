@@ -61,4 +61,5 @@ public class BoardTodayController {
         model.addAttribute("todayUpdate", boardTodayDTO);
         return "board/TodayUpdate";
     }
+
 }
