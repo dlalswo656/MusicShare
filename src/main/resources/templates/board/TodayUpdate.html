@@ -3,18 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 수정</title>
+    <th:block th:replace="inc/header"></th:block>
 </head>
 <body>
+<th:block th:replace="inc/body"></th:block>
 <form action="/Board/TodayUpdate" method="post" name="TodayUpdate">
+    <!-- CSRF 토큰 가져옴 -->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <div class="container mt-5">
         <table class="table mt-4">
-            <thead>
-                <input type="hidden" name="id" th:value="${todayUpdate.id}">
-                제목 : <input type="text" name="todayTitle" th:value="${todayUpdate.todayTitle}">
-                작성자 : <input type="text" name="todayWriter" th:value="${todayUpdate.todayWriter}">
-                내용 : <input type="text" name="todayContent" th:value="${todayUpdate.todayContent}">
+            <thead class="thead-light">
+            <input type="hidden" name="id" th:value="${todayUpdate.id}">
+            <tr>
+                <th>번호</th>
+                <td th:text="${todayUpdate.id}"></td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="todayTitle" th:value="${todayUpdate.todayTitle}" disabled></td>
+            </tr>
+            <tr>
+                <th>작성자</th>
+                <td><input type="text" name="todayWriter" th:value="${todayUpdate.todayWriter}"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><input type="text" name="todayContent" th:value="${todayUpdate.todayContent}" textarea></td>
+            </tr>
+            <tr>
+                <th>조회수</th>
+                <td><input type="text" name="todayHits" th:value="${todayUpdate.todayHits}" disabled></td>
+            </tr>
+            <tr>
+                <th>등록 날짜</th>
+                <td><input type="text" name="todayCreatedTime" th:value="${todayUpdate.todayCreatedTime}" disabled></td>
+            </tr>
+            <tr>
+                <th>수정 날짜</th>
+                <td><input type="text" name="todayUpdatedTime" th:value="${todayUpdate.todayUpdatedTime}" disabled></td>
+            </tr>
             </thead>
         </table>
+        <button type="submit" class="btn btn-primary">글수정</button>
     </div>
 </form>
 </body>

@@ -17,7 +17,8 @@
                 <th>작성자</th>
                 <th>내용</th>
                 <th>조회수</th>
-                <th>등록일</th>
+                <th>등록 날짜</th>
+                <th>수정 날짜</th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                 <td th:text="${boardTodayList.todayContent}"></td>
                 <th th:text="${boardTodayList.todayHits}"></th>
                 <td th:text="${#temporals.format(boardTodayList.todayCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(boardTodayList.todayUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbody>
         </table>

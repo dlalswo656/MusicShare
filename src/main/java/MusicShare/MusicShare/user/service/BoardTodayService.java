@@ -47,4 +47,9 @@ public class BoardTodayService {
             return null;
         }
     }
+
+    // 글수정
+    public void UpdateToday(BoardTodayDTO boardTodayDTO) {
+        boardTodayRepository.save(BoardTodayEntity.toUpdateTodayEntity(boardTodayDTO));
+    }
 }

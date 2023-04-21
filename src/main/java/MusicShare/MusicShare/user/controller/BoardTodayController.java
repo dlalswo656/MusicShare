@@ -55,11 +55,17 @@ public class BoardTodayController {
     }
 
     // 게시글 수정
-    @GetMapping("/Update")
-    public String TodayUpdate(@PathVariable Long id, Model model) {
+    @GetMapping("/Update/{id}")
+    public String TodayUpdate(@PathVariable("id") Long id, Model model) {
         BoardTodayDTO boardTodayDTO = boardTodayService.TodayId(id);
         model.addAttribute("todayUpdate", boardTodayDTO);
         return "board/TodayUpdate";
+    }
+
+    @PostMapping("/TodayUpdate")
+    public String UpdateToday(@ModelAttribute BoardTodayDTO boardTodayDTO) {
+        boardTodayService.UpdateToday(boardTodayDTO);
+        return "redirect:/Board/Today";
     }
 
 }

@@ -35,12 +35,15 @@
             <td th:text="${boardToday.todayHits}"></td>
         </tr>
         <tr>
-            <th>등록일</th>
+            <th>등록 날짜</th>
             <td th:text="${boardToday.todayCreatedTime}"></td>
+        </tr><tr>
+            <th>수정 날짜</th>
+            <td th:text="${boardToday.todayUpdatedTime}"></td>
         </tr>
     </table>
     <div>
-        <a class="btn btn-primary" href="/Board/TodayUpdate">글 수정</a>
+        <a class="btn btn-primary" th:href="@{/Board/Update/{id}(id=${boardToday.id})}">글 수정</a>
     </div>
 </div>
 </body>

@@ -37,4 +37,13 @@ public class BoardTodayEntity extends BaseEntity {
         return boardTodayEntity;
     }
 
+    public static BoardTodayEntity toUpdateTodayEntity(BoardTodayDTO boardTodayDTO) {
+        BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
+        boardTodayEntity.setId(boardTodayDTO.getId());
+        boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
+        boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
+        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
+        boardTodayEntity.setTodayHits(boardTodayDTO.getTodayHits());
+        return boardTodayEntity;
+    }
 }
