@@ -1,9 +1,11 @@
 package MusicShare.MusicShare.user.entity;
 
 import MusicShare.MusicShare.user.dto.BoardTodayDTO;
+import MusicShare.MusicShare.user.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,29 +23,38 @@ public class BoardTodayEntity extends BaseEntity {
     @Column(length = 500)
     private String todayContent;
 
-    @Column(length = 20, nullable = false) // 크기 20, not null
-    private String todayWriter;
-
     @Column
     private int todayHits;
 
-    public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO) {
-        BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
-        boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
-        boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
-        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
-        boardTodayEntity.setTodayHits(0);
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-        return boardTodayEntity;
-    }
+    @OneToMany(mappedBy = "user")
+    private List<BoardTodayEntity> boards;
 
-    public static BoardTodayEntity toUpdateTodayEntity(BoardTodayDTO boardTodayDTO) {
+    public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
         boardTodayEntity.setId(boardTodayDTO.getId());
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
         boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
-        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
-        boardTodayEntity.setTodayHits(boardTodayDTO.getTodayHits());
+        boardTodayEntity.setTodayHits(0);
+        boardTodayEntity.setUser(user);
+
         return boardTodayEntity;
+    }
+
+    public static BoardTodayEntity toUpdateTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
+        BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
+        boardTodayEntity.setId(boardTodayDTO.getId());
+        boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
+        boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
+        boardTodayEntity.setTodayHits(boardTodayDTO.getTodayHits());
+        boardTodayEntity.setUser(user);
+        return boardTodayEntity;
+    }
+
+    public String getName() {
+        return user != null ? user.getName() : "";
     }
 }

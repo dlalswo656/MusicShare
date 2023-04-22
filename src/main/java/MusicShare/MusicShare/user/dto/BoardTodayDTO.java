@@ -2,7 +2,6 @@ package MusicShare.MusicShare.user.dto;
 
 import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -11,10 +10,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor // 기본 생성자
 @AllArgsConstructor // 모든 필드를 배개변수로 하는 생성자
 public class BoardTodayDTO {
-    private Long id;
+    private Long id; // 게시글 넘버
     private String todayTitle;
+    private Long userId; // 작성자 Id
+    private String userName; // 작성자 이름
     private String todayContent;
-    private String todayWriter;
     private int todayHits;
     private LocalDateTime todayCreatedTime;
     private LocalDateTime todayUpdatedTime;
@@ -24,10 +24,16 @@ public class BoardTodayDTO {
         boardTodayDTO.setId(boardTodayEntity.getId());
         boardTodayDTO.setTodayTitle(boardTodayEntity.getTodayTitle());
         boardTodayDTO.setTodayContent(boardTodayEntity.getTodayContent());
-        boardTodayDTO.setTodayWriter(boardTodayEntity.getTodayWriter());
         boardTodayDTO.setTodayHits(boardTodayEntity.getTodayHits());
         boardTodayDTO.setTodayCreatedTime(boardTodayEntity.getCreatedTime());
         boardTodayDTO.setTodayUpdatedTime(boardTodayEntity.getUpdatedTime());
+
+        // 작성자 이름 설정
+        if (boardTodayEntity.getUser() != null) {
+            boardTodayDTO.setUserId(boardTodayEntity.getUser().getId());
+            boardTodayDTO.setUserName(boardTodayEntity.getUser().getName());
+        }
+
         return boardTodayDTO;
     }
 

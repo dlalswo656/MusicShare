@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <th>작성자</th>
-            <td th:text="${boardToday.todayWriter}"></td>
+            <td th:text="${boardToday.todayEmail}"></td>
         </tr>
     <!--    <tr>
             <th>Email</th>
@@ -44,6 +44,7 @@
     </table>
     <div>
         <a class="btn btn-primary" th:href="@{/Board/Update/{id}(id=${boardToday.id})}">글 수정</a>
+        <a class="btn btn-info" th:href="@{/Board/Delete/{id}(id=${boardToday.id})}">글 삭제</a>
     </div>
 </div>
 </body>
