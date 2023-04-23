@@ -3,7 +3,6 @@ package MusicShare.MusicShare.user.controller;
 import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import MusicShare.MusicShare.user.service.BoardTodayService;
-import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ public class BoardTodayController {
 
     private final BoardTodayRepository boardTodayRepository;
     private final BoardTodayService boardTodayService;
-    private final UserService userService;
 
     // 오늘의 음악
     @GetMapping("/Today")

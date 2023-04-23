@@ -20,41 +20,34 @@ public class BoardTodayEntity extends BaseEntity {
     @Column
     private String todayTitle;
 
+    @Column
+    private String todayWriter;
+
     @Column(length = 500)
     private String todayContent;
 
     @Column
     private int todayHits;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
 
-    @OneToMany(mappedBy = "user")
-    private List<BoardTodayEntity> boards;
-
-    public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
+    public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
-        boardTodayEntity.setId(boardTodayDTO.getId());
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
         boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
+        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
         boardTodayEntity.setTodayHits(0);
-        boardTodayEntity.setUser(user);
 
         return boardTodayEntity;
     }
 
-    public static BoardTodayEntity toUpdateTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
+    public static BoardTodayEntity toUpdateTodayEntity(BoardTodayDTO boardTodayDTO) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
         boardTodayEntity.setId(boardTodayDTO.getId());
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
         boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
+        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
         boardTodayEntity.setTodayHits(boardTodayDTO.getTodayHits());
-        boardTodayEntity.setUser(user);
         return boardTodayEntity;
     }
 
-    public String getName() {
-        return user != null ? user.getName() : "";
-    }
 }

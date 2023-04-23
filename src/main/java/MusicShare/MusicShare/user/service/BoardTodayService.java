@@ -2,6 +2,7 @@ package MusicShare.MusicShare.user.service;
 
 import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.entity.BoardTodayEntity;
+import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,16 @@ import java.util.Optional;
 
 
 
+
 @Service
 @RequiredArgsConstructor
 public class BoardTodayService {
 
-    private final UserService userService;
+
     private final BoardTodayRepository boardTodayRepository;
 
     public void TodaySave(BoardTodayDTO boardTodayDTO) {
-        BoardTodayEntity boardTodayEntity = BoardTodayEntity.toBoardTodayEntity(boardTodayDTO, userService);
+        BoardTodayEntity boardTodayEntity = BoardTodayEntity.toBoardTodayEntity(boardTodayDTO);
         boardTodayRepository.save(boardTodayEntity);
     }
 
