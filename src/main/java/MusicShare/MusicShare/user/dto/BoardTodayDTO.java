@@ -12,8 +12,9 @@ import java.time.LocalDateTime;
 public class BoardTodayDTO {
     private Long id; // 게시글 넘버
     private String todayTitle;
+    private Long userId;
+    private String userName;
     private String todayContent;
-    private String todayWriter;
     private int todayHits;
     private LocalDateTime todayCreatedTime;
     private LocalDateTime todayUpdatedTime;
@@ -22,11 +23,17 @@ public class BoardTodayDTO {
         BoardTodayDTO boardTodayDTO = new BoardTodayDTO();
         boardTodayDTO.setId(boardTodayEntity.getId());
         boardTodayDTO.setTodayTitle(boardTodayEntity.getTodayTitle());
-        boardTodayDTO.setTodayWriter(boardTodayEntity.getTodayWriter());
         boardTodayDTO.setTodayContent(boardTodayEntity.getTodayContent());
         boardTodayDTO.setTodayHits(boardTodayEntity.getTodayHits());
         boardTodayDTO.setTodayCreatedTime(boardTodayEntity.getCreatedTime());
         boardTodayDTO.setTodayUpdatedTime(boardTodayEntity.getUpdatedTime());
+        boardTodayDTO.setUserName(boardTodayEntity.getUser().getName());
+
+        // 작성자 이름
+        if (boardTodayEntity.getUser() != null) {
+            boardTodayDTO.setUserId(boardTodayEntity.getUser().getId());
+            boardTodayDTO.setUserName(boardTodayEntity.getUser().getName());
+        }
 
         return boardTodayDTO;
     }

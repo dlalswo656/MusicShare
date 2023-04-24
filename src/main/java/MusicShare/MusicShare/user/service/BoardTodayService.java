@@ -21,8 +21,12 @@ public class BoardTodayService {
 
     private final BoardTodayRepository boardTodayRepository;
 
-    public void TodaySave(BoardTodayDTO boardTodayDTO) {
-        BoardTodayEntity boardTodayEntity = BoardTodayEntity.toBoardTodayEntity(boardTodayDTO);
+    public BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
+        return BoardTodayEntity.toBoardTodayEntity(boardTodayDTO, user);
+    }
+
+    public void TodaySave(BoardTodayDTO boardTodayDTO, UserEntity user) {
+        BoardTodayEntity boardTodayEntity = BoardTodayEntity.toBoardTodayEntity(boardTodayDTO, user);
         boardTodayRepository.save(boardTodayEntity);
     }
 
@@ -56,8 +60,22 @@ public class BoardTodayService {
     }
 
     // 게시글 수정
-    public void UpdateToday(BoardTodayDTO boardTodayDTO) {
-        boardTodayRepository.save(BoardTodayEntity.toUpdateTodayEntity(boardTodayDTO));
+    public void UpdateToday(Long id, BoardTodayDTO boardTodayDTO) {
+        Optional<BoardTodayEntity> optionalBoardTodayEntity = boardTodayRepository.findById(id);
+
+        if (optionalBoardTodayEntity.isPresent()) {
+            BoardTodayEntity boardTodayEntity = optionalBoardTodayEntity.get();
+
+            // 수정 정보 설정
+            boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
+
+            // 저장
+            boardTodayRepository.save(boardTodayEntity);
+        } else {
+            System.out.println("게시글 수정 실패");
+        }
+
+    //    boardTodayRepository.save(BoardTodayEntity.toUpdateTodayEntity(boardTodayDTO));
     }
     
     // 게시글 삭제

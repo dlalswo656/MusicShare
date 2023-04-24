@@ -32,6 +32,9 @@ public class UserEntity {
     @Column
     private String role; // 유저, 관리자 역할 추가
 
+    @OneToMany(mappedBy = "user")
+    private List<BoardTodayEntity> boards = new ArrayList<>();
+
     // 디비 값이 이상하게 들어오거나 에러가 뜨면 이 부분일 가능성 크다
     public static UserEntity toUserEntity(UserDTO userDTO) {
         UserEntity userEntity = new UserEntity();

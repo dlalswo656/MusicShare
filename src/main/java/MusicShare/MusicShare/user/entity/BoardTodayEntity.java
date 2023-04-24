@@ -20,22 +20,23 @@ public class BoardTodayEntity extends BaseEntity {
     @Column
     private String todayTitle;
 
-    @Column
-    private String todayWriter;
-
     @Column(length = 500)
     private String todayContent;
 
     @Column
     private int todayHits;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-    public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO) {
+
+    public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
         boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
-        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
         boardTodayEntity.setTodayHits(0);
+        boardTodayEntity.setUser(user);
 
         return boardTodayEntity;
     }
@@ -45,7 +46,6 @@ public class BoardTodayEntity extends BaseEntity {
         boardTodayEntity.setId(boardTodayDTO.getId());
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());
         boardTodayEntity.setTodayContent(boardTodayDTO.getTodayContent());
-        boardTodayEntity.setTodayWriter(boardTodayDTO.getTodayWriter());
         boardTodayEntity.setTodayHits(boardTodayDTO.getTodayHits());
         return boardTodayEntity;
     }
