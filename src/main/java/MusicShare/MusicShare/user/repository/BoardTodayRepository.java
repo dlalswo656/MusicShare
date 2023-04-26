@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface BoardTodayRepository extends JpaRepository<BoardTodayEntity, Long> {
     // Update board_today set today_hits = today_hits+1 where id=?
 
     @Modifying
     @Query(value = "Update BoardTodayEntity b set b.todayHits = b.todayHits + 1 where b.id = :id")
     void UpdateHits(@Param("id") Long id);
+
 }

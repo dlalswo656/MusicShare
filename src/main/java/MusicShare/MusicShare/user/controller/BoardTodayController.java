@@ -7,13 +7,13 @@ import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.BoardTodayService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import org.apache.catalina.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -27,9 +27,14 @@ public class BoardTodayController {
 
     // 오늘의 음악
     @GetMapping("/Today")
-    public String TodayBoard(Model model, HttpSession session) {
-        // DB에 게시글 데이터를 가져옴
-        List<BoardTodayDTO> boardTodayDTOList = boardTodayService.findAll();
+    public String TodayBoard(Model model, HttpSession session, @PageableDefault(size = 10) Pageable pageable) {
+        // 페이징 처리
+        Page<BoardTodayDTO> boardTodayDTOList = boardTodayService.findAll(pageable);
+
+//        PageLinks pageLinks = new PageLinks(boardTodayDTOList, "/board/Today");
+//        model.addAttribute("pagination", pageLinks);
+
+        // DB에 게시글 데이터를 가져옴,
         model.addAttribute("boardTodayList", boardTodayDTOList);
         return "board/Today";
     }

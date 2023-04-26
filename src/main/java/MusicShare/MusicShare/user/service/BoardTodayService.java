@@ -5,10 +5,12 @@ import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -31,12 +33,14 @@ public class BoardTodayService {
     }
 
     // 오늘의 음악 리스트
-    public List<BoardTodayDTO> findAll() {
-        List<BoardTodayEntity> boardTodayEntityList = boardTodayRepository.findAll();
-        List<BoardTodayDTO> boardTodayDTOList = new ArrayList<>();
-        for (BoardTodayEntity boardTodayEntity: boardTodayEntityList) {
-            boardTodayDTOList.add(BoardTodayDTO.toBoardTodayDTO(boardTodayEntity));
+    public Page<BoardTodayDTO> findAll(Pageable pageable) {
+        int page = pageable.getPageNumber() - 1;
+        if (page < 0) {
+            page = 0;
         }
+        int pageLimit = 10;
+        Page<BoardTodayEntity> boardTodayEntityList = boardTodayRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+        Page<BoardTodayDTO> boardTodayDTOList = boardTodayEntityList.map(BoardTodayDTO::toBoardTodayDTO);
         return boardTodayDTOList;
     }
 
