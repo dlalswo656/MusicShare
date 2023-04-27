@@ -34,11 +34,9 @@ public class BoardTodayService {
 
     // 오늘의 음악 리스트
     public Page<BoardTodayDTO> findAll(Pageable pageable) {
-        int page = pageable.getPageNumber() - 1;
-        if (page < 0) {
-            page = 0;
-        }
+        int page = pageable.getPageNumber();
         int pageLimit = 10;
+        int pageSize = 10;
         Page<BoardTodayEntity> boardTodayEntityList = boardTodayRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
         Page<BoardTodayDTO> boardTodayDTOList = boardTodayEntityList.map(BoardTodayDTO::toBoardTodayDTO);
         return boardTodayDTOList;

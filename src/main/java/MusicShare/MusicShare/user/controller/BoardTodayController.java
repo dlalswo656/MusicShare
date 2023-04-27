@@ -31,8 +31,18 @@ public class BoardTodayController {
         // 페이징 처리
         Page<BoardTodayDTO> boardTodayDTOList = boardTodayService.findAll(pageable);
 
-//        PageLinks pageLinks = new PageLinks(boardTodayDTOList, "/board/Today");
-//        model.addAttribute("pagination", pageLinks);
+        // 다음 페이지로 넘어가는 링크 생성 코드
+        int currentPage = boardTodayDTOList.getNumber(); // 현재 페이지 번호
+        int totalPages = boardTodayDTOList.getTotalPages(); // 전체 페이지
+        int prevPage = currentPage > 0 ? currentPage -1 : 0; // 이전 페이지
+        int nextPage = currentPage + 1 < totalPages ? currentPage + 1 : totalPages -1; // 다음 페이지
+        String url = "/Board/Today?page="; // 다음 페이지로 넘어가는 링크 URL
+
+        model.addAttribute("currentPage", currentPage); // 현재 페이지
+        model.addAttribute("totalPages", totalPages); // 전체 페이지
+        model.addAttribute("url", url); 
+        model.addAttribute("nextPageUrl", nextPage); // 다음 페이지
+        model.addAttribute("prevPageUrl", prevPage); // 이전 페이지
 
         // DB에 게시글 데이터를 가져옴,
         model.addAttribute("boardTodayList", boardTodayDTOList);
@@ -91,8 +101,7 @@ public class BoardTodayController {
             boardTodayDTO.setUserId(userId);
             model.addAttribute("todayUpdate", boardTodayDTO);
         }
-    //    BoardTodayDTO boardTodayDTO = boardTodayService.TodayId(id);
-    //    model.addAttribute("todayUpdate", boardTodayDTO);
+
         return "board/TodayUpdate";
     }
 

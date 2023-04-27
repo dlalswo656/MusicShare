@@ -37,6 +37,28 @@
     <div class="container mt-5">
         <a class="btn btn-primary" href="/Board/TodayWrite">글작성</a>
     </div>
+    <!-- 페이징 -->
+    <div class="container mt-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{|${url}0|}" th:text="'«'"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{|${url}${currentPage - 1}|}" th:text="'‹'"></a>
+                </li>
+                <li class="page-item" th:each="page: ${#numbers.sequence(1, totalPages)}" th:classappend="${page-1 == currentPage} ? active : ''">
+                    <a class="page-link" th:href="@{|${url}${page - 1}|}" th:text="${page}"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{|${url}${currentPage + 1}|}" th:text="'›'"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{|${url}${totalPages - 1}|}" th:text="'»'"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </form>
 </body>
 </html>
