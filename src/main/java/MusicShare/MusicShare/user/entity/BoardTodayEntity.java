@@ -1,11 +1,9 @@
 package MusicShare.MusicShare.user.entity;
 
 import MusicShare.MusicShare.user.dto.BoardTodayDTO;
-import MusicShare.MusicShare.user.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter

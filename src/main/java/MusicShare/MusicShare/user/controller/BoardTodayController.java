@@ -84,9 +84,12 @@ public class BoardTodayController {
         boardTodayService.TodayHits(id);
         BoardTodayDTO boardTodayDTO = boardTodayService.TodayId(id);
         model.addAttribute("boardToday", boardTodayDTO);
-        System.out.println("유저의 아이디" + boardTodayDTO);
+
+        System.out.println("유저의 아이디" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트
         return "board/TodayDetail";
     }
+
+    @PostMapping("/Reply")
 
     // 게시글 수정
     @GetMapping("/Update/{id}")

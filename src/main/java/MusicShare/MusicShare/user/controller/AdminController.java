@@ -3,8 +3,6 @@ package MusicShare.MusicShare.user.controller;
 import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,5 @@
 package MusicShare.MusicShare.user.service;
 
-
 import MusicShare.MusicShare.user.config.SecurityConfig;
 import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.entity.UserEntity;
