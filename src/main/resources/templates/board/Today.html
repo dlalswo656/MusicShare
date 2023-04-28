@@ -47,7 +47,7 @@
                 <li class="page-item">
                     <a class="page-link" th:href="@{|${url}${currentPage - 1}|}" th:text="'‹'"></a>
                 </li>
-                <li class="page-item" th:each="page: ${#numbers.sequence(1, totalPages)}" th:classappend="${page-1 == currentPage} ? active : ''">
+                <li class="page-item" th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page-1 == currentPage} ? active : ''">
                     <a class="page-link" th:href="@{|${url}${page - 1}|}" th:text="${page}"></a>
                 </li>
                 <li class="page-item">

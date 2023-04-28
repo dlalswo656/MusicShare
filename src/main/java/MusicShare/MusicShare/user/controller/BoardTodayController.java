@@ -36,15 +36,19 @@ public class BoardTodayController {
         int totalPages = boardTodayDTOList.getTotalPages(); // 전체 페이지
         int prevPage = currentPage > 0 ? currentPage -1 : 0; // 이전 페이지
         int nextPage = currentPage + 1 < totalPages ? currentPage + 1 : totalPages -1; // 다음 페이지
+        int startPage = currentPage / 10 * 10 + 1; // 시작 페이지
+        int endPage = Math.min(startPage + 9, totalPages); // 끝 페이지
         String url = "/Board/Today?page="; // 다음 페이지로 넘어가는 링크 URL
 
         model.addAttribute("currentPage", currentPage); // 현재 페이지
         model.addAttribute("totalPages", totalPages); // 전체 페이지
-        model.addAttribute("url", url); 
-        model.addAttribute("nextPageUrl", nextPage); // 다음 페이지
         model.addAttribute("prevPageUrl", prevPage); // 이전 페이지
+        model.addAttribute("nextPageUrl", nextPage); // 다음 페이지
+        model.addAttribute("startPage", startPage); // 시작 페이지
+        model.addAttribute("endPage", endPage); // 끝 페이지
+        model.addAttribute("url", url);
 
-        // DB에 게시글 데이터를 가져옴,
+        // DB에 게시글 데이터를 가져옴
         model.addAttribute("boardTodayList", boardTodayDTOList);
         return "board/Today";
     }
