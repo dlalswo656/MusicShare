@@ -89,8 +89,6 @@ public class BoardTodayController {
         return "board/TodayDetail";
     }
 
-    @PostMapping("/Reply")
-
     // 게시글 수정
     @GetMapping("/Update/{id}")
     public String TodayUpdate(@PathVariable("id") Long id, Model model, HttpSession session) {

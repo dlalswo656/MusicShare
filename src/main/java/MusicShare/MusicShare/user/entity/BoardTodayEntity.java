@@ -28,7 +28,6 @@ public class BoardTodayEntity extends BaseEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-
     public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());

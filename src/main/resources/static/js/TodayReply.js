@@ -1,15 +1,35 @@
-const TodayReply = () => {
-    const TodayContent = document.getElementById("TodayContent").value;
-    const TodayId = document.getElementById("boardToday").getAttribute("data-today-id"); // 해당 게시글의 아이디를 얻어옴
-    console.log("댓글 내용 : ", todayContent);
+$(document).ready(function() {
+  $('#submitTodayReply').on('click', submitTodayReply);
+});
 
-    $.ajax({
-        // 요청 방식 : post, 요청주소 : /Today/Reply, 요청데이터 : 작성자, 작성 내용, 게시글 번호
-        type: "post",
-        url: "/Today/Reply",
-        data: {
-            "todayContent": todayContent,
-            "TodayId": TodayId
-        }
-    });
+function submitTodayReply() {
+  const commentInput = $('textarea[name="todayContent"]');
+  console.log('commentInput:', commentInput.val()); // 추가
+  const commentText = commentInput.val().trim();
+  const userId = $('#user-id').val();
+  const boardTodayId = '${boardToday.id}';
+
+  if (commentText === '') {
+    alert('댓글을 입력해주세요.');
+    commentInput.focus();
+    return;
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/Board/Today/Reply',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      userId: userId,
+      boardTodayId: boardTodayId,
+      todayContent: commentText
+    }),
+    success: function(response) {
+      console.log('댓글이 등록되었습니다.');
+      commentInput.val(''); // 페이지 새로고침
+    },
+    error: function(error) {
+      alert(`오류: ${error.responseText}`);
+    }
+  });
 }

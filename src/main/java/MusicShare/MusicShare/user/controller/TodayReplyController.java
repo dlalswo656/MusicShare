@@ -1,21 +1,21 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.TodayReplyDTO;
+import MusicShare.MusicShare.user.service.TodayReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/Today")
 public class TodayReplyController {
 
-    @PostMapping("/Reply")
-    public @ResponseBody String ReplySave(@ModelAttribute TodayReplyDTO todayReplyDTO) {
-        System.out.println("TodayReplyDTO = " + todayReplyDTO);
-        return "요청 Nice";
+    private final TodayReplyService todayReplyService;
+
+    @PostMapping("/Board/Today/Reply")
+    public String TodayReplySave(@RequestBody TodayReplyDTO todayReplyDTO) {
+        Long boardTodayId = todayReplyService.saveTodayReply(todayReplyDTO);
+        System.out.println("제발 에러 늪에서 빠져 나오자 : " + boardTodayId);
+        return "redirect:/Board/Today/" + boardTodayId;
     }
 }
