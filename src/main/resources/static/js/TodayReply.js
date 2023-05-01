@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function submitTodayReply() {
-  const commentInput = $('textarea[name="todayContent"]');
+  const commentInput = $('#todayContent');
   console.log('commentInput:', commentInput.val()); // 추가
   const commentText = commentInput.val().trim();
   const userId = $('#user-id').val();
@@ -17,7 +17,7 @@ function submitTodayReply() {
 
   $.ajax({
     type: 'POST',
-    url: '/Board/Today/Reply',
+    url: '/Board/Today/${boardToday.id}/Reply',
     contentType: 'application/json',
     data: JSON.stringify({
       userId: userId,

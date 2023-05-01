@@ -12,7 +12,7 @@ public class TodayReplyController {
 
     private final TodayReplyService todayReplyService;
 
-    @PostMapping("/Board/Today/Reply")
+    @PostMapping("/Board/Today/{boardTodayId}/Reply")
     public String TodayReplySave(@RequestBody TodayReplyDTO todayReplyDTO) {
         Long boardTodayId = todayReplyService.saveTodayReply(todayReplyDTO);
         System.out.println("제발 에러 늪에서 빠져 나오자 : " + boardTodayId);
