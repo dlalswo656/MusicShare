@@ -80,7 +80,11 @@ public class BoardTodayController {
 
     // 게시글 정보
     @GetMapping("/Today/{id}")
-    public String TodayId(@PathVariable Long id, Model model) {
+    public String TodayId(@PathVariable Long id, Model model, HttpSession session) {
+        Long LoginId = (Long) session.getAttribute("LoginId");
+        model.addAttribute("LoginId", LoginId);
+        System.out.println("유저 아이디 잘 가져왔니 ?" + LoginId);
+
         boardTodayService.TodayHits(id);
         BoardTodayDTO boardTodayDTO = boardTodayService.TodayId(id);
         model.addAttribute("boardToday", boardTodayDTO);

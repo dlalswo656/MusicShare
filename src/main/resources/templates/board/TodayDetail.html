@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- CSRF -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 
     <meta charset="UTF-8">
-
-
     <title>오늘의 음악</title>
     <!-- jquery cdn -->
     <script
@@ -18,7 +19,6 @@
 </head>
 <body>
 <th:block th:replace="inc/body"></th:block>
-
 <div class="container mt-5">
     <table class="table mt-4">
         <thead class="thead-light">
@@ -63,12 +63,12 @@
         <label for="todayContent"></label>
         <textarea class="form-control" name="todayContent" id="todayContent" rows="3" placeholder="내용을 입력해주세요."></textarea>
         <button class="btn btn-primary" type="button" id="submitTodayReply">댓글 등록</button>
-        <!--<button type="submit" class="btn btn-primary" onclick="TodayReply()">댓글 등록</button>-->
     </div>
 
     <!-- 댓글 리스트 -->
     <div class="mt-5">
-        <input type="hidden" id="user-id" th:value="${userId}"> <!-- 댓글 작성자 id -->
+        <input type="hidden" id="boardToday-id" th:value="${boardToday.id}">
+        <input type="hidden" id="user-id" th:value="${LoginId}"> <!-- 댓글 작성자 id -->
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -89,5 +89,4 @@
     </div>
 </div>
 </body>
-
 </html>

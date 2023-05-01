@@ -1,6 +1,5 @@
 package MusicShare.MusicShare.user.entity;
 
-import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.dto.TodayReplyDTO;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
@@ -8,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.bytebuddy.asm.Advice;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
