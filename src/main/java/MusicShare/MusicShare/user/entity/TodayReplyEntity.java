@@ -27,7 +27,7 @@ public class TodayReplyEntity {
     private String replyContent;
 
     @Column
-    private LocalDateTime ReplyCreatedTime;
+    private LocalDateTime replyCreatedTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -38,10 +38,10 @@ public class TodayReplyEntity {
     private BoardTodayEntity today;
 
     public static TodayReplyEntity toTodayReplyEntity(TodayReplyDTO todayReplyDTO, UserRepository userRepository,
-    BoardTodayRepository boardTodayRepository) {
+                                                      BoardTodayRepository boardTodayRepository) {
         TodayReplyEntity todayReplyEntity = new TodayReplyEntity();
         todayReplyEntity.setId(todayReplyDTO.getId());
-        todayReplyEntity.setReplyContent(todayReplyDTO.getTodayContents());
+        todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
         todayReplyEntity.setReplyCreatedTime(todayReplyDTO.getReplyCreatedTime());
 
         if (todayReplyDTO.getUserId() != null) {

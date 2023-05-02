@@ -20,6 +20,7 @@ public class TodayReplyService {
     public Long saveTodayReply (TodayReplyDTO todayReplyDTO) {
         TodayReplyEntity todayReplyEntity = TodayReplyEntity.toTodayReplyEntity(todayReplyDTO, userRepository, boardTodayRepository);
         TodayReplyEntity savedReply = todayReplyRepository.save(todayReplyEntity);
+        System.out.println("너 맞아 ? : " + todayReplyDTO);
         return savedReply.getToday().getId();
     }
 
@@ -29,4 +30,5 @@ public class TodayReplyService {
                 .map(TodayReplyDTO::toTodayReplyDTO)
                 .collect(Collectors.toList());
     }
+
 }

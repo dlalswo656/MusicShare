@@ -58,17 +58,20 @@
         <a class="btn btn-primary" th:href="@{/Board/Update/{id}(id=${boardToday.id})}">글 수정</a>
         <a class="btn btn-info" th:href="@{/Board/Delete/{id}(id=${boardToday.id})}">글 삭제</a>
     </div>
+
     <!-- 댓글 -->
     <div class="form-group mt-5">
-        <label for="todayContent"></label>
-        <textarea class="form-control" name="todayContent" id="todayContent" rows="3" placeholder="내용을 입력해주세요."></textarea>
+        <label for="replyContent"></label>
+        <textarea class="form-control" name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요."></textarea>
         <button class="btn btn-primary" type="button" id="submitTodayReply">댓글 등록</button>
     </div>
 
     <!-- 댓글 리스트 -->
     <div class="mt-5">
-        <input type="hidden" id="boardToday-id" th:value="${boardToday.id}">
-        <input type="hidden" id="user-id" th:value="${LoginId}"> <!-- 댓글 작성자 id -->
+        <input type="hidden" id="boardToday-id" th:value="${boardToday.id}"/> <!-- 게시글 id -->
+        <input type="hidden" id="user-id" th:value="${LoginId}"/> <!-- 댓글 작성자 id -->
+        <input type="hidden" id="user-name" th:value="${LoginName}"/>
+        <input type="hidden" id="reply-createdTime" th:value="${replyCreatedTime}"/>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -79,10 +82,10 @@
                 </thead>
                 <tbody>
                 <!-- 댓글 리스트를 for-each로 반복하며 출력 -->
-                <tr th:each="reply : ${replyList}">
-                    <td th:text="${reply.userName}"></td>
-                    <td th:text="${reply.todayContents}"></td>
-                    <td th:text="${#temporals.format(reply.ReplyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <tr th:each="replyList : ${replyList}">
+                    <td th:text="${replyList.userName}"></td>
+                    <td th:text="${replyList.replyContent}"></td>
+                    <td th:text="${#temporals.format(replyList.replyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 </tr>
                 </tbody>
             </table>

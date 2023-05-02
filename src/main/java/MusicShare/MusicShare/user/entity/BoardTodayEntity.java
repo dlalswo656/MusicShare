@@ -4,6 +4,8 @@ import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +29,9 @@ public class BoardTodayEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @OneToMany(mappedBy = "today") // TodayReplyEntity에서 JoinColumn
+    private List<TodayReplyEntity> replyList = new ArrayList<>();
 
     public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();

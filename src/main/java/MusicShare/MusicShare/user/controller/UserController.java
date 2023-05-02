@@ -67,6 +67,7 @@ public class UserController {
             session.setAttribute("LoginId", LoginResult.getId()); // pk 값 불러오기
             session.setAttribute("LoginUser", LoginResult); // 로그인 후에 유저의 id를 보이기 위해 추가
             session.setAttribute("LoginEmail", LoginResult.getEmail());
+            session.setAttribute("LoginName", LoginResult.getName());
             session.setAttribute("LoginRole", LoginResult.getRole()); // 사용자의 역할 정보를 추가로 저장
             System.out.println("userId : " + LoginResult.getId());
            return "index";

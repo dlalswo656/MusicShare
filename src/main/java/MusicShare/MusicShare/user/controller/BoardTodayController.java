@@ -1,11 +1,13 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.BoardTodayDTO;
+import MusicShare.MusicShare.user.dto.TodayReplyDTO;
 import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.BoardTodayService;
+import MusicShare.MusicShare.user.service.TodayReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,6 +27,7 @@ public class BoardTodayController {
     private final BoardTodayRepository boardTodayRepository;
     private final BoardTodayService boardTodayService;
     private final UserRepository userRepository;
+    private final TodayReplyService todayReplyService;
 
     // 오늘의 음악
     @GetMapping("/Today")
@@ -85,9 +89,18 @@ public class BoardTodayController {
         model.addAttribute("LoginId", LoginId);
         System.out.println("유저 아이디 잘 가져왔니 ?" + LoginId);
 
+        String LoginName = (String) session.getAttribute("LoginName");
+        model.addAttribute("LoginName", LoginName);
+        System.out.println("고요" + LoginName);
+
         boardTodayService.TodayHits(id);
         BoardTodayDTO boardTodayDTO = boardTodayService.TodayId(id);
         model.addAttribute("boardToday", boardTodayDTO);
+
+        // 댓글 리스트 가져오기
+        List<TodayReplyDTO> replyList = todayReplyService.getTodayByBoardTodayId(id);
+        model.addAttribute("replyList", replyList);
+        System.out.println("야 유저 이름 잘 가져왔냐 ?" + replyList);
 
         System.out.println("유저의 아이디" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트
         return "board/TodayDetail";
