@@ -32,8 +32,10 @@ public class TodayReplyService {
         List<TodayReplyDTO> todayReplyDTOS = todayReplyEntities.stream()
                 .map(TodayReplyDTO::toTodayReplyDTO)
                 .collect(Collectors.toList());
-        // 댓글 최신순
+        
+        // 댓글 최신순 정렬
         todayReplyDTOS.sort(Comparator.comparing(TodayReplyDTO::getReplyCreatedTime).reversed());
+
         return todayReplyDTOS;
     }
 

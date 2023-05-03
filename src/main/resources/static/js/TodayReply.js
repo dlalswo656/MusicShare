@@ -28,7 +28,7 @@ function submitTodayReply() {
         return;
     }
 
-// CSRF id 값 변수 추가
+    // CSRF id 값 변수 추가
     var csrfToken = $("meta[name='_csrf']").attr("content");
     var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
@@ -58,3 +58,25 @@ function submitTodayReply() {
     }
   });
 }
+    // 댓글 더보기
+    function moreReplies() {
+      const boardTodayId = $('#boardToday-id').val();
+      const lastReplyId = $('.reply-item:last').data('reply-id');
+
+      $.ajax({
+        type: 'GET',
+        url: `/Board/Today/${boardTodayId}/Reply/more?lastReplyId=${lastReplyId}`,
+        success: function(response) {
+          const replies = $(response).find('.reply-item');
+          if (replies.length === 0) {
+            $('#more-btn').hide();
+            return;
+          }
+          $('#reply-list').append(replies);
+        },
+        error: function(error) {
+          console.log('오류:', error);
+          alert('오류: ' + error.responseText);
+        }
+      });
+    }

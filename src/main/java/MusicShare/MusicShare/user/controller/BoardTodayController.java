@@ -101,6 +101,7 @@ public class BoardTodayController {
         // 댓글 리스트 가져오기
         List<TodayReplyDTO> replyList = todayReplyService.getTodayByBoardTodayId(id);
         model.addAttribute("replyList", replyList);
+
         System.out.println("replyList" + replyList); // 댓글 리스트를 잘 가져오는 지 디버깅
         System.out.println("boardTodayDTO" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트
         return "board/TodayDetail";

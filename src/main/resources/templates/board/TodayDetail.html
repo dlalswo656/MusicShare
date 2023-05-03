@@ -14,6 +14,7 @@
             crossorigin="anonymous">
     </script>
     <script type="text/javascript" th:src="@{/js/TodayReply.js}"></script>
+    <script type="text/javascript" th:src="@{/js/TodayReplyMore.js}"></script>
 
     <th:block th:replace="inc/header"></th:block>
 </head>
@@ -34,10 +35,6 @@
             <th>작성자</th>
             <td th:text="${boardToday.userName}"></td>
         </tr>
-    <!--    <tr>
-            <th>Email</th>
-            <td th:text="${boardToday.LoginEmail}"></td>
-        </tr>-->
         <tr>
             <th>내용</th>
             <td th:text="${boardToday.todayContent}"></td>
@@ -48,10 +45,10 @@
         </tr>
         <tr>
             <th>등록 날짜</th>
-            <td th:text="${boardToday.todayCreatedTime}"></td>
+            <td th:text="${#temporals.format(boardToday.todayCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr><tr>
             <th>수정 날짜</th>
-            <td th:text="${boardToday.todayUpdatedTime}"></td>
+            <td th:text="${#temporals.format(boardToday.todayUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
     <div>
@@ -82,13 +79,16 @@
                 </thead>
                 <tbody>
                 <!-- 댓글 리스트를 for-each로 반복하며 출력 -->
-                <tr th:each="replyList : ${replyList}">
+                <tr th:each="replyList, i : ${replyList}" th:if="${i.index < 5}" class="reply-item">
                     <td th:text="${replyList.userName}"></td>
                     <td th:text="${replyList.replyContent}"></td>
                     <td th:text="${#temporals.format(replyList.replyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 </tr>
                 </tbody>
             </table>
+        <div class="text-center">
+            <button type="button" id="more-btn" class="btn btn-secondary" th:if="${replyList.size() > 5}" onclick="moreReplies()">댓글 더보기</button>
+        </div>
     </div>
 </div>
 </body>

@@ -20,4 +20,5 @@ public class TodayReplyController {
 
         return "redirect:/Board/Today/" + boardTodayId;
     }
+
 }
