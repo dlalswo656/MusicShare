@@ -1,7 +1,6 @@
 package MusicShare.MusicShare.user.dto;
 
 import MusicShare.MusicShare.user.entity.TodayReplyEntity;
-import MusicShare.MusicShare.user.entity.UserEntity;
 import lombok.*;
 import java.time.LocalDateTime;
 

@@ -39,13 +39,6 @@
 
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" style="width:250px;" placeholder="검색어 입력" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">검색</button>
-          </form>
-        </li>
-
         <!-- 로그인 전 -->
         <li class="nav-item" th:if="${session.LoginRole == null}">
           <a class="nav-link" href="/Login">로그인</a>

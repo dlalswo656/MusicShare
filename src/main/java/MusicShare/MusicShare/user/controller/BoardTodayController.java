@@ -60,6 +60,7 @@ public class BoardTodayController {
     // 게시글 작성
     @GetMapping("/TodayWrite")
     public String TodayWrite(BoardTodayDTO boardTodayDTO, HttpSession session) {
+
         // 비로그인 유저가 글작성을 누르면 Login
         Long LoginId = (Long) session.getAttribute("LoginId");
         if (LoginId == null) {
@@ -87,22 +88,21 @@ public class BoardTodayController {
     public String TodayId(@PathVariable Long id, Model model, HttpSession session) {
         Long LoginId = (Long) session.getAttribute("LoginId");
         model.addAttribute("LoginId", LoginId);
-        System.out.println("유저 아이디 잘 가져왔니 ?" + LoginId);
+        System.out.println("LoginId ?" + LoginId); // LoginId에 값이 잘 가져오는 지 디버깅
 
         String LoginName = (String) session.getAttribute("LoginName");
         model.addAttribute("LoginName", LoginName);
-        System.out.println("고요" + LoginName);
+        System.out.println("고요" + LoginName); // LoginName에 name 값이 잘 가져오는 지 디버깅
 
         boardTodayService.TodayHits(id);
         BoardTodayDTO boardTodayDTO = boardTodayService.TodayId(id);
-        model.addAttribute("boardToday", boardTodayDTO);
+        model.addAttribute("boardToday", boardTodayDTO); // boardTodayDTO에 값이 잘 가져오는 지 디버깅
 
         // 댓글 리스트 가져오기
         List<TodayReplyDTO> replyList = todayReplyService.getTodayByBoardTodayId(id);
         model.addAttribute("replyList", replyList);
-        System.out.println("야 유저 이름 잘 가져왔냐 ?" + replyList);
-
-        System.out.println("유저의 아이디" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트
+        System.out.println("replyList" + replyList); // 댓글 리스트를 잘 가져오는 지 디버깅
+        System.out.println("boardTodayDTO" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트
         return "board/TodayDetail";
     }
 

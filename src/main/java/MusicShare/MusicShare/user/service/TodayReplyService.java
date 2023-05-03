@@ -7,6 +7,7 @@ import MusicShare.MusicShare.user.repository.TodayReplyRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,15 +21,20 @@ public class TodayReplyService {
     public Long saveTodayReply (TodayReplyDTO todayReplyDTO) {
         TodayReplyEntity todayReplyEntity = TodayReplyEntity.toTodayReplyEntity(todayReplyDTO, userRepository, boardTodayRepository);
         TodayReplyEntity savedReply = todayReplyRepository.save(todayReplyEntity);
-        System.out.println("너 맞아 ? : " + todayReplyDTO);
+        System.out.println("todayReplyDTO : " + todayReplyDTO); // todayReplyDTO에 userName값을 가져오는 지 디버깅
         return savedReply.getToday().getId();
     }
 
     public List<TodayReplyDTO> getTodayByBoardTodayId(Long boardTodayId) {
         List<TodayReplyEntity> todayReplyEntities = todayReplyRepository.findByTodayId(boardTodayId);
-        return todayReplyEntities.stream()
+
+        // 댓글 최신순
+        List<TodayReplyDTO> todayReplyDTOS = todayReplyEntities.stream()
                 .map(TodayReplyDTO::toTodayReplyDTO)
                 .collect(Collectors.toList());
+        // 댓글 최신순
+        todayReplyDTOS.sort(Comparator.comparing(TodayReplyDTO::getReplyCreatedTime).reversed());
+        return todayReplyDTOS;
     }
 
 }
