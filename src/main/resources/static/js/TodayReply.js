@@ -8,7 +8,7 @@ function submitTodayReply() {
     const commentText = commentInput.val();
     const userId = $('#user-id').val();
     const userName = $('#user-name').val(); // 댓글 작성자 이름
-    const replyCreatedTime = new Date(new Date().getTime() + (9 * 60 * 60 * 1000)).toISOString(); // 수정된 부분
+    const replyCreatedTime = new Date(new Date().getTime() + (9 * 60 * 60 * 1000)).toISOString(); // 한국 시간
 
     // 값들을 변수에 잘 가져오는 지 디버깅
     console.log('commentInput:', commentInput.val());
@@ -58,25 +58,3 @@ function submitTodayReply() {
     }
   });
 }
-    // 댓글 더보기
-    function moreReplies() {
-      const boardTodayId = $('#boardToday-id').val();
-      const lastReplyId = $('.reply-item:last').data('reply-id');
-
-      $.ajax({
-        type: 'GET',
-        url: `/Board/Today/${boardTodayId}/Reply/more?lastReplyId=${lastReplyId}`,
-        success: function(response) {
-          const replies = $(response).find('.reply-item');
-          if (replies.length === 0) {
-            $('#more-btn').hide();
-            return;
-          }
-          $('#reply-list').append(replies);
-        },
-        error: function(error) {
-          console.log('오류:', error);
-          alert('오류: ' + error.responseText);
-        }
-      });
-    }

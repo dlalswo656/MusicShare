@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class TodayReplyController {
@@ -19,6 +21,13 @@ public class TodayReplyController {
         todayReplyService.saveTodayReply(todayReplyDTO);
 
         return "redirect:/Board/Today/" + boardTodayId;
+    }
+
+    // 댓글 더보기 ajax 처리
+    @GetMapping("/Board/Today/{boardTodayId}/Reply")
+    @ResponseBody
+    public List<TodayReplyDTO> getTodayReplies(@PathVariable Long boardTodayId) {
+        return todayReplyService.getTodayByBoardTodayId(boardTodayId);
     }
 
 }
