@@ -24,6 +24,8 @@ function moreReplies() {
             }
             if (data.length === 0 || data.length < 5) {
                 $("#more-btn").hide();  // 더 이상 가져올 댓글이 없는 경우 더보기 버튼 숨김
+            } else if ($(".reply-item").length >= data.length) {
+                $("#more-btn").hide();
             }
             else {
                 $("#more-btn").attr("onclick", "moreReplies()");

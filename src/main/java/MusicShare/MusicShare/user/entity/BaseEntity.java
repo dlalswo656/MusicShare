@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false) // 수정 시간 막음
     private LocalDateTime createdTime;
 
     @UpdateTimestamp
-    @Column(insertable = false)
+    @Column(insertable = false) // 작성 시간 false
     private LocalDateTime updatedTime;
 }

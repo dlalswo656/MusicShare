@@ -17,7 +17,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardTodayService {
 
-
     private final BoardTodayRepository boardTodayRepository;
 
     public BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
@@ -73,12 +72,11 @@ public class BoardTodayService {
         } else {
             System.out.println("게시글 수정 실패");
         }
-
-    //    boardTodayRepository.save(BoardTodayEntity.toUpdateTodayEntity(boardTodayDTO));
     }
     
     // 게시글 삭제
     public void Delete(Long id) {
+
         boardTodayRepository.deleteById(id);
     }
 }

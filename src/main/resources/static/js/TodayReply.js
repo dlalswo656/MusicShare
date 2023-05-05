@@ -32,6 +32,7 @@ function submitTodayReply() {
     var csrfToken = $("meta[name='_csrf']").attr("content");
     var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
+    // 댓글 등록 ajax
     $.ajax({
         type: 'POST',
         url: '/Board/Today/' + boardTodayId + '/Reply',
@@ -58,3 +59,65 @@ function submitTodayReply() {
     }
   });
 }
+
+// 댓글 수정 버튼 클릭 시
+    $('.edit-btn').click(function () {
+        // 수정할 댓글의 id 가져오기
+        var replyId = $(this).data('replyList').id;
+
+        console.log("댓글 수정 가능 ? " + replyId);
+        // 수정할 댓글의 내용을 입력하는 폼
+        var editForm = $('<form>').attr('id', 'edit-form-' + replyId);
+        var editInput = $('<input>').attr({
+            type: 'text',
+            name: 'content',
+            value: $(this).data('replyList').content
+        });
+        var editButton = $('<button>').attr({
+            type: 'submit'
+        }).text('수정');
+        editForm.append(editInput, editButton);
+
+        $(this).closest('tr').after($('<tr>').append($('<td>').attr('colspan', '3').append(editForm)));
+
+        // 수정 버튼 클릭 시 Ajax 요청을 보내어 처리함
+        $('#edit-form-'+ replyId).submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'PUT',
+                url: '/api/reply/' + replyId,
+                data: $(this).serialize(),
+                success: function (result) {
+                    // ...
+                },
+                error: function (error) {
+                    // ...
+                }
+            });
+        });
+    });
+
+    // 댓글 삭제 버튼 클릭 시
+    $('.delete-btn').click(function () {
+        // 삭제할 댓글의 id를 가져옴
+        var replyId = $(this).data('replyList').id;
+
+        console.log("댓글 삭제 가능 ? " + replyId);
+        // 삭제 확인 다이얼로그를 출력함
+        if (confirm('댓글을 삭제하시겠습니까?')) {
+            // 삭제 버튼 클릭 시 Ajax 요청을 보내어 처리함
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/reply/' + replyId,
+                success: function (result) {
+                    // ...
+                },
+                error: function (error) {
+                    // ...
+                }
+            });
+        }
+    });
+
+
+

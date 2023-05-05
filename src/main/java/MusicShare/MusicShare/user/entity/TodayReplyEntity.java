@@ -57,4 +57,11 @@ public class TodayReplyEntity {
         return todayReplyEntity;
     }
 
+    public static TodayReplyEntity toUpdateTodayReply(TodayReplyDTO todayReplyDTO) {
+        TodayReplyEntity todayReplyEntity = new TodayReplyEntity();
+        todayReplyEntity.setId(todayReplyDTO.getId());
+        todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
+
+        return todayReplyEntity;
+    }
 }

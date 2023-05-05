@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TodayReplyRepository extends JpaRepository<TodayReplyEntity, Long> {
     List<TodayReplyEntity> findByTodayId(Long boardTodayId);
-}
 
+}

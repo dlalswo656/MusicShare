@@ -5,6 +5,7 @@ import MusicShare.MusicShare.user.dto.TodayReplyDTO;
 import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
+import MusicShare.MusicShare.user.repository.TodayReplyRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.BoardTodayService;
 import MusicShare.MusicShare.user.service.TodayReplyService;
@@ -28,6 +29,7 @@ public class BoardTodayController {
     private final BoardTodayService boardTodayService;
     private final UserRepository userRepository;
     private final TodayReplyService todayReplyService;
+    private final TodayReplyRepository todayReplyRepository;
 
     // 오늘의 음악
     @GetMapping("/Today")
@@ -146,8 +148,10 @@ public class BoardTodayController {
             if (!boardTodayEntity.getUser().getId().equals(userId)) {
                 return "redirect:/Board/Today";
             }
+            // 게시글 삭제
             boardTodayService.Delete(id);
     }
         return "redirect:/Board/Today";
     }
+
 }
