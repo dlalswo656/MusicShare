@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,20 +41,4 @@ public class TodayReplyService {
         return todayReplyDTOS;
     }
 
-    // 댓글 수정
-    public void updateTodayReply(Long replyId, TodayReplyDTO todayReplyDTO) {
-        Optional<TodayReplyEntity> replyOptional = todayReplyRepository.findById(replyId);
-
-        if (replyOptional.isPresent()) {
-            TodayReplyEntity replyEntity = replyOptional.get();
-            TodayReplyEntity updatedEntity = TodayReplyEntity.toUpdateTodayReply(todayReplyDTO);
-            replyEntity.setReplyContent(updatedEntity.getReplyContent());
-            todayReplyRepository.save(replyEntity);
-        }
-    }
-
-    // 댓글 삭제
-    public void deleteTodayReply(Long replyId) {
-        todayReplyRepository.deleteById(replyId);
-    }
 }

@@ -36,11 +36,11 @@
             </tr>
             <tr>
                 <th>등록 날짜</th>
-                <td><input type="text" name="todayCreatedTime" th:value="${todayUpdate.todayCreatedTime}" disabled></td>
+                <td><input th:text="${#temporals.format(todayUpdate.todayCreatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
             </tr>
             <tr>
                 <th>수정 날짜</th>
-                <td><input type="text" name="todayUpdatedTime" th:value="${todayUpdate.todayUpdatedTime}" disabled></td>
+                <td><input th:text="${#temporals.format(todayUpdate.todayUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
             </tr>
             </thead>
         </table>

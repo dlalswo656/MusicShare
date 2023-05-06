@@ -30,18 +30,4 @@ public class TodayReplyController {
         return todayReplyService.getTodayByBoardTodayId(boardTodayId);
     }
 
-    // 댓글 수정
-    @PutMapping("/Board/Today/Reply/{replyId}")
-    @ResponseBody
-    public void updateTodayReply(@PathVariable Long replyId, @RequestBody TodayReplyDTO todayReplyDTO) {
-        todayReplyService.updateTodayReply(replyId, todayReplyDTO);
-    }
-
-    // 댓글 삭제
-    @DeleteMapping("/Board/Today/Reply/{replyId}")
-    @ResponseBody
-    public void deleteTodayReply(@PathVariable Long replyId) {
-        todayReplyService.deleteTodayReply(replyId);
-    }
-
 }
