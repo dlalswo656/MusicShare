@@ -30,4 +30,25 @@ public class TodayReplyController {
         return todayReplyService.getTodayByBoardTodayId(boardTodayId);
     }
 
+    // 댓글 수정
+    @PutMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
+    @ResponseBody
+    public void updateTodayReply(@PathVariable Long boardTodayId, @PathVariable("replyId") Long replyId, @RequestBody TodayReplyDTO todayReplyDTO) {
+        todayReplyDTO.setId(replyId);
+        todayReplyDTO.setBoardTodayId(boardTodayId);
+        todayReplyService.updateTodayReply(todayReplyDTO);
+
+        // 디버깅
+        System.out.println(" 야 : " + replyId);
+        System.out.println("잘 가져 : " + boardTodayId);
+        System.out.println("오고 있니 ? : " + todayReplyDTO);
+    }
+
+    // 댓글 삭제
+    @DeleteMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
+    @ResponseBody
+    public void deleteTodayReply(@PathVariable Long boardTodayId, @PathVariable("replyId") Long replyId) {
+        todayReplyService.deleteTodayReply(replyId);
+    }
+
 }

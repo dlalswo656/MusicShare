@@ -61,13 +61,63 @@ function submitTodayReply() {
 }
 
 // 댓글 수정
-function replyModify
+$(document).on('click', '.replyModify', function() {
+    var replyId = $(this).data('replyList-id');
+    var newContent = prompt("수정할 내용을 입력하세요.");
+    const boardTodayId = $('#boardToday-id').val();
 
+    console.log("replyId : " + replyId);
+    console.log("newContent : " + newContent);
 
+    // CSRF id 값 변수 추가
+    var csrfToken = $("meta[name='_csrf']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+if (newContent !== null && newContent !== '') {
+    $.ajax({
+        type: 'PUT',
+        url: '/Board/Today/' + boardTodayId + '/Reply/' + replyId,
+        data: {
+            content: newContent,
+            },
+            // CSRF 변수 값 가져오기
+            beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
+            },
+            success: function(response) {
+            alert('댓글이 수정되었습니다.');
+            // 수정된 댓글 화면에 반영하는 코드 추가
+            },
+            error: function(xhr) {
+            alert(xhr.responseText);
+            }
+        });
+    }
+});
 
 // 댓글 삭제
-function replyDelete
+$(document).on('click', '.replyDelete', function() {
+    var replyId = $(this).data('replyList-id');
+    const boardTodayId = $('#boardToday-id').val();
 
+    // CSRF id 값 변수 추가
+    var csrfToken = $("meta[name='_csrf']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+    if (confirm("정말 삭제하시겠습니까?")) {
+    $.ajax({
+    type: 'DELETE',
+    url: '/Board/Today/' + boardTodayId + '/Reply/' + replyId,
+    success: function(response) {
+    alert('댓글이 삭제되었습니다.');
+    // 삭제된 댓글 화면에서 제거하는 코드 추가
+    },
+    error: function(xhr) {
+    alert(xhr.responseText);
+    }
+    });
+    }
+    });
 
 
 

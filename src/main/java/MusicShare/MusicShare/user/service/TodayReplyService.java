@@ -41,4 +41,22 @@ public class TodayReplyService {
         return todayReplyDTOS;
     }
 
+    // 댓글 수정
+    public void updateTodayReply(TodayReplyDTO todayReplyDTO) {
+        List<TodayReplyEntity> todayReplyEntitys = todayReplyRepository.findByTodayId(todayReplyDTO.getId());
+        if (todayReplyEntitys.isEmpty()) {
+            throw new IllegalArgumentException("해당 댓글이 없습니다. id = " + todayReplyDTO.getId());
+        }
+        TodayReplyEntity todayReplyEntity = todayReplyEntitys.get(0);
+
+        System.out.println("댓글 Entitys 넘어오나 ? " + todayReplyEntitys);
+        System.out.println("댓글 Entity 넘어오나 ? " + todayReplyEntity);
+        System.out.println("서비스 DTO 넘어오나 ? " + todayReplyDTO);
+    }
+
+    // 댓글 삭제
+    public void deleteTodayReply(Long replyId) {
+        todayReplyRepository.deleteById(replyId);
+    }
+    
 }

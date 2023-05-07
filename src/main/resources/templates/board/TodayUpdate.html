@@ -20,11 +20,11 @@
             </tr>
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="todayTitle" th:value="${todayUpdate.todayTitle}" disabled></td>
+                <td th:text="${todayUpdate.todayTitle}" name="todayTitle" disabled></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td><input type="text" name="userName" th:value="${todayUpdate.userName}" disabled></td>
+                <td th:text="${todayUpdate.userName}" name="userName" disabled></td>
             </tr>
             <tr>
                 <th>내용</th>
@@ -32,15 +32,15 @@
             </tr>
             <tr>
                 <th>조회수</th>
-                <td><input type="text" name="todayHits" th:value="${todayUpdate.todayHits}" disabled></td>
+                <td th:text="${todayUpdate.todayHits}" name="todayHits" disabled></td>
             </tr>
             <tr>
                 <th>등록 날짜</th>
-                <td><input th:text="${#temporals.format(todayUpdate.todayCreatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
+                <td th:text="${#temporals.format(todayUpdate.todayCreatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
             </tr>
             <tr>
                 <th>수정 날짜</th>
-                <td><input th:text="${#temporals.format(todayUpdate.todayUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
+                <td th:text="${#temporals.format(todayUpdate.todayUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
             </tr>
             </thead>
         </table>
