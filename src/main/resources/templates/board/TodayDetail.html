@@ -69,12 +69,16 @@
         <input type="hidden" id="user-id" th:value="${LoginId}"/> <!-- 댓글 작성자 id -->
         <input type="hidden" id="user-name" th:value="${LoginName}"/>
         <input type="hidden" id="reply-createdTime" th:value="${replyCreatedTime}"/>
+<!--        <input type="hidden" id="reply-updatedTime" th:value="${replyUpdatedTime}"/>-->
+        <input type="hidden" id="replyList-id" th:value="${replyList}"/>
+<!--        <input type="hidden" id="reply-id" th:value="${reply.id}"/> &lt;!&ndash; 댓글 id &ndash;&gt;-->
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>작성자</th>
                     <th>내용</th>
-                    <th>작성일시</th>
+                    <th>작성 시간</th>
+<!--                    <th>수정 시간</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -83,15 +87,16 @@
                     <td th:text="${replyList.userName}"></td>
                     <td th:text="${replyList.replyContent}"></td>
                     <td th:text="${#temporals.format(replyList.replyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+<!--                    <td th:text="${#temporals.format(replyList.replyUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
 
                     <!-- 수정 버튼 -->
                     <td>
-                        <button type="button" class="btn btn-info btn-sm replyModify" data-replyList-id="${replyList.id}">수정</button>
+                        <button type="button" class="btn btn-info btn-sm replyModify" data-reply-id="${reply.id}">수정</button>
                     </td>
 
                     <!-- 삭제 버튼 -->
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm replyDelete" data-replyList-id="${replyList.id}">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm replyDelete" data-reply-id="${reply.id}">삭제</button>
                     </td>
 
                 </tr>

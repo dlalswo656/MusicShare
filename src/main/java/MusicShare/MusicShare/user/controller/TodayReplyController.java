@@ -1,8 +1,10 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.TodayReplyDTO;
+import MusicShare.MusicShare.user.entity.TodayReplyEntity;
 import MusicShare.MusicShare.user.service.TodayReplyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,23 +34,20 @@ public class TodayReplyController {
 
     // 댓글 수정
     @PutMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
-    @ResponseBody
-    public void updateTodayReply(@PathVariable Long boardTodayId, @PathVariable("replyId") Long replyId, @RequestBody TodayReplyDTO todayReplyDTO) {
-        todayReplyDTO.setId(replyId);
-        todayReplyDTO.setBoardTodayId(boardTodayId);
-        todayReplyService.updateTodayReply(todayReplyDTO);
+    public ResponseEntity<Long> toUpdateTodayReply(@PathVariable Long boardTodayId, @PathVariable Long replyId, @RequestBody TodayReplyDTO todayReplyDTO) {
+        todayReplyService.toUpdateTodayReply(replyId, todayReplyDTO);
 
-        // 디버깅
-        System.out.println(" 야 : " + replyId);
-        System.out.println("잘 가져 : " + boardTodayId);
-        System.out.println("오고 있니 ? : " + todayReplyDTO);
+        System.out.println("댓글 아이디 : " + replyId);
+        System.out.println("댓글 디티오 : " + todayReplyDTO);
+
+        return ResponseEntity.ok(replyId);
     }
 
     // 댓글 삭제
     @DeleteMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
-    @ResponseBody
-    public void deleteTodayReply(@PathVariable Long boardTodayId, @PathVariable("replyId") Long replyId) {
-        todayReplyService.deleteTodayReply(replyId);
+    public ResponseEntity toDeleteTodayReply(@PathVariable Long id) {
+        todayReplyService.delete(id);
+        return ResponseEntity.ok(id);
     }
 
 }

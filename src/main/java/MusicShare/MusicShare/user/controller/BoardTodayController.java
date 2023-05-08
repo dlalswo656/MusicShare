@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class BoardTodayController {
     private final BoardTodayService boardTodayService;
     private final UserRepository userRepository;
     private final TodayReplyService todayReplyService;
-    private final TodayReplyRepository todayReplyRepository;
+    private final TodayReplyDTO todayReplyDTO;
 
     // 오늘의 음악
     @GetMapping("/Today")
@@ -103,6 +104,7 @@ public class BoardTodayController {
         // 댓글 리스트 가져오기
         List<TodayReplyDTO> replyList = todayReplyService.getTodayByBoardTodayId(id);
         model.addAttribute("replyList", replyList);
+
 
         System.out.println("replyList" + replyList); // 댓글 리스트를 잘 가져오는 지 디버깅
         System.out.println("boardTodayDTO" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트

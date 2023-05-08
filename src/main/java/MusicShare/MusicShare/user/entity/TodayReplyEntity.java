@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Entity
@@ -17,7 +16,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "today_reply")
-public class TodayReplyEntity {
+public class TodayReplyEntity extends BaseEntity{
 
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +24,6 @@ public class TodayReplyEntity {
 
     @Column
     private String replyContent;
-
-    @Column
-    private LocalDateTime replyCreatedTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -42,7 +38,6 @@ public class TodayReplyEntity {
         TodayReplyEntity todayReplyEntity = new TodayReplyEntity();
         todayReplyEntity.setId(todayReplyDTO.getId());
         todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
-        todayReplyEntity.setReplyCreatedTime(todayReplyDTO.getReplyCreatedTime());
 
         if (todayReplyDTO.getUserId() != null) {
             Optional<UserEntity> userOpt = userRepository.findById(todayReplyDTO.getUserId());
@@ -57,11 +52,4 @@ public class TodayReplyEntity {
         return todayReplyEntity;
     }
 
-    public static TodayReplyEntity toUpdateTodayReply(TodayReplyDTO todayReplyDTO) {
-        TodayReplyEntity todayReplyEntity = new TodayReplyEntity();
-        todayReplyEntity.setId(todayReplyDTO.getId());
-        todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
-
-        return todayReplyEntity;
-    }
 }

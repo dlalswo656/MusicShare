@@ -8,6 +8,8 @@ import MusicShare.MusicShare.user.repository.TodayReplyRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +29,7 @@ public class TodayReplyService {
         return savedReply.getToday().getId();
     }
 
+    // 댓글 리스트
     public List<TodayReplyDTO> getTodayByBoardTodayId(Long boardTodayId) {
         List<TodayReplyEntity> todayReplyEntities = todayReplyRepository.findByTodayId(boardTodayId);
 
@@ -38,25 +41,21 @@ public class TodayReplyService {
         // 댓글 최신순 정렬
         todayReplyDTOS.sort(Comparator.comparing(TodayReplyDTO::getReplyCreatedTime).reversed());
 
+
         return todayReplyDTOS;
     }
 
     // 댓글 수정
-    public void updateTodayReply(TodayReplyDTO todayReplyDTO) {
-        List<TodayReplyEntity> todayReplyEntitys = todayReplyRepository.findByTodayId(todayReplyDTO.getId());
-        if (todayReplyEntitys.isEmpty()) {
-            throw new IllegalArgumentException("해당 댓글이 없습니다. id = " + todayReplyDTO.getId());
-        }
-        TodayReplyEntity todayReplyEntity = todayReplyEntitys.get(0);
+    public void toUpdateTodayReply(Long id, TodayReplyDTO todayReplyDTO) {
+        TodayReplyEntity todayReplyEntity = todayReplyRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다. " + id));
 
-        System.out.println("댓글 Entitys 넘어오나 ? " + todayReplyEntitys);
-        System.out.println("댓글 Entity 넘어오나 ? " + todayReplyEntity);
-        System.out.println("서비스 DTO 넘어오나 ? " + todayReplyDTO);
+        System.out.println("댓글 엔티티 : " + todayReplyEntity);
+
+        todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
     }
 
-    // 댓글 삭제
-    public void deleteTodayReply(Long replyId) {
-        todayReplyRepository.deleteById(replyId);
+    public void delete(Long id) {
+        todayReplyRepository.deleteById(id);
     }
-    
 }
