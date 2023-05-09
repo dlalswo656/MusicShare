@@ -2,6 +2,7 @@ package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.TodayReplyDTO;
 import MusicShare.MusicShare.user.entity.TodayReplyEntity;
+import MusicShare.MusicShare.user.repository.TodayReplyRepository;
 import MusicShare.MusicShare.user.service.TodayReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class TodayReplyController {
 
     private final TodayReplyService todayReplyService;
+    private final TodayReplyRepository todayReplyRepository;
 
     // 댓글 ajax 처리
     @PostMapping("/Board/Today/{boardTodayId}/Reply")
@@ -34,20 +37,19 @@ public class TodayReplyController {
 
     // 댓글 수정
     @PutMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
-    public ResponseEntity<Long> toUpdateTodayReply(@PathVariable Long boardTodayId, @PathVariable Long replyId, @RequestBody TodayReplyDTO todayReplyDTO) {
-        todayReplyService.toUpdateTodayReply(replyId, todayReplyDTO);
+    public ResponseEntity<TodayReplyDTO> toUpdateTodayReply(@PathVariable Long boardTodayId, @PathVariable Long replyId, @RequestBody TodayReplyDTO todayReplyDTO) {
+        TodayReplyDTO updatedReply = todayReplyService.toUpdateTodayReply(replyId, todayReplyDTO);
 
-        System.out.println("댓글 아이디 : " + replyId);
-        System.out.println("댓글 디티오 : " + todayReplyDTO);
-
-        return ResponseEntity.ok(replyId);
+        return ResponseEntity.ok(updatedReply);
     }
+
+
 
     // 댓글 삭제
     @DeleteMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
-    public ResponseEntity toDeleteTodayReply(@PathVariable Long id) {
-        todayReplyService.delete(id);
-        return ResponseEntity.ok(id);
+    public ResponseEntity toDeleteTodayReply(@PathVariable Long boardTodayId, @PathVariable Long replyId) {
+        todayReplyService.delete(replyId);
+        return ResponseEntity.ok(replyId);
     }
 
 }

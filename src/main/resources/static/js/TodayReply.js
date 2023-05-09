@@ -65,7 +65,7 @@ function submitTodayReply() {
 
 // 댓글 수정
 $(document).on('click', '.replyModify', function() {
-    var replyId = this.dataset.replyId; // 수정 버튼을 누른 댓글의 id
+    var replyId = $(this).closest('.reply-item').data('reply-id'); // 삭제 버튼을 누른 댓글의 id
     var newContent = prompt("수정할 내용을 입력하세요.");
     const boardTodayId = $('#boardToday-id').val();
 
@@ -80,6 +80,8 @@ $(document).on('click', '.replyModify', function() {
             data: JSON.stringify({
                 "content": newContent,
             }),
+            contentType: "application/json",
+            dataType: "json",
             // CSRF 변수 값 가져오기
             beforeSend: function(xhr) {
                 xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
@@ -95,33 +97,37 @@ $(document).on('click', '.replyModify', function() {
     }
 });
 
+
 // 댓글 삭제
 $(document).on('click', '.replyDelete', function() {
-    var replyId = $(this).data('reply-id'); // 삭제 버튼을 누른 댓글의 id
+    var replyId = $(this).closest('.reply-item').data('reply-id'); // 삭제 버튼을 누른 댓글의 id
     const boardTodayId = $('#boardToday-id').val();
 
     // CSRF id 값 변수 추가
     var csrfToken = $("meta[name='_csrf']").attr("content");
     var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
-    if (confirm("정말 삭제하시겠습니까?")) {
-        $.ajax({
-            type: 'DELETE',
-            url: '/Board/Today/' + boardTodayId + '/Reply/' + replyId,
-            // CSRF 변수 값 가져오기
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
-            },
-            success: function(response) {
-                alert('댓글이 삭제되었습니다.');
-                // 삭제된 댓글 화면에서 제거하는 코드 추가
-            },
-            error: function(xhr) {
-                alert(xhr.responseText);
-            }
-        });
-    }
+    // 댓글 삭제 요청 보내기
+    $.ajax({
+        url: "/Board/Today/" + boardTodayId + "/Reply/" + replyId,
+        type: "DELETE",
+        // CSRF 변수 값 가져오기
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
+        },
+        success: function() {
+            // 페이지 새로고침
+            location.reload();
+        },
+        error: function() {
+            alert("댓글 삭제에 실패했습니다.");
+            error
+        }
+    });
 });
+
+
+
 
 
 

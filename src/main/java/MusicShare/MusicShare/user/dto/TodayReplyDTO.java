@@ -21,6 +21,10 @@ public class TodayReplyDTO {
     private LocalDateTime replyCreatedTime;
     private LocalDateTime replyUpdatedTime;
 
+    public TodayReplyDTO(TodayReplyEntity updatedReply) {
+
+    }
+
     public static TodayReplyDTO toTodayReplyDTO(TodayReplyEntity todayReplyEntity) {
         TodayReplyDTO todayReplyDTO = new TodayReplyDTO();
         todayReplyDTO.setId(todayReplyEntity.getId());

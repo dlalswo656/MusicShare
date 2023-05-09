@@ -71,7 +71,8 @@
         <input type="hidden" id="reply-createdTime" th:value="${replyCreatedTime}"/>
 <!--        <input type="hidden" id="reply-updatedTime" th:value="${replyUpdatedTime}"/>-->
         <input type="hidden" id="replyList-id" th:value="${replyList}"/>
-<!--        <input type="hidden" id="reply-id" th:value="${reply.id}"/> &lt;!&ndash; 댓글 id &ndash;&gt;-->
+        <!--<input type="hidden" id="replyIds" th:value="${replyIds}"/>--> <!-- 댓글 아이디 -->
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -83,22 +84,21 @@
                 </thead>
                 <tbody>
                 <!-- 댓글 리스트를 for-each로 반복하며 출력 -->
-                <tr th:each="replyList, i : ${replyList}" th:if="${i.index < 5}" class="reply-item">
+                <tr th:each="replyList, i : ${replyList}" th:if="${i.index < 5}" class="reply-item" th:data-reply-id="${replyList.id}">
                     <td th:text="${replyList.userName}"></td>
                     <td th:text="${replyList.replyContent}"></td>
                     <td th:text="${#temporals.format(replyList.replyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-<!--                    <td th:text="${#temporals.format(replyList.replyUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+                    <!-- <td th:text="${#temporals.format(replyList.replyUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
 
                     <!-- 수정 버튼 -->
                     <td>
-                        <button type="button" class="btn btn-info btn-sm replyModify" data-reply-id="${reply.id}">수정</button>
+                        <button type="button" class="btn btn-info btn-sm replyModify">수정</button>
                     </td>
 
                     <!-- 삭제 버튼 -->
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm replyDelete" data-reply-id="${reply.id}">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm replyDelete">삭제</button>
                     </td>
-
                 </tr>
                 </tbody>
             </table>

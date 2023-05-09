@@ -105,7 +105,14 @@ public class BoardTodayController {
         List<TodayReplyDTO> replyList = todayReplyService.getTodayByBoardTodayId(id);
         model.addAttribute("replyList", replyList);
 
+        // 댓글 아이디
+        List<Long> replyIds = new ArrayList<>();
+        for(TodayReplyDTO reply : replyList){
+            replyIds.add(reply.getId());
+        }
+        model.addAttribute("replyIds", replyIds);
 
+        System.out.println("replyIds : " + replyIds);
         System.out.println("replyList" + replyList); // 댓글 리스트를 잘 가져오는 지 디버깅
         System.out.println("boardTodayDTO" + boardTodayDTO); // 유저의 id boardTodayDTO로 잘 가져오는 지 테스트
         return "board/TodayDetail";

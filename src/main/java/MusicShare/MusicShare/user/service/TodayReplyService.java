@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,16 +47,22 @@ public class TodayReplyService {
     }
 
     // 댓글 수정
-    public void toUpdateTodayReply(Long id, TodayReplyDTO todayReplyDTO) {
+    public TodayReplyDTO toUpdateTodayReply(Long id, TodayReplyDTO todayReplyDTO) {
         TodayReplyEntity todayReplyEntity = todayReplyRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다. " + id));
 
-        System.out.println("댓글 엔티티 : " + todayReplyEntity);
-
         todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
+
+        TodayReplyEntity updatedReply = todayReplyRepository.save(todayReplyEntity);
+
+        return new TodayReplyDTO(updatedReply);
     }
 
+
+
+    // 댓글 삭제
     public void delete(Long id) {
+
         todayReplyRepository.deleteById(id);
     }
 }
