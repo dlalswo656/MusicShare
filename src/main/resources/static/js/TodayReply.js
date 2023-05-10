@@ -68,17 +68,31 @@ $(document).on('click', '.replyModify', function() {
     var replyId = $(this).closest('.reply-item').data('reply-id'); // 삭제 버튼을 누른 댓글의 id
     var newContent = prompt("수정할 내용을 입력하세요.");
     const boardTodayId = $('#boardToday-id').val();
+    const userId = $('#user-id').val(); // 로그인한 유저의 id
+
+    console.log("유저 아이디" + userId); // 로그인 유저 id
 
     // CSRF id 값 변수 추가
     var csrfToken = $("meta[name='_csrf']").attr("content");
     var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+    // 댓글 작성자의 id 변수 추가
+    var authorId = $(this).closest('.reply-item').attr('data-reply-author'); // Detail 85줄 data-reply-author 값 가져오기
+
+    console.log("댓글 작성자 id" + authorId); // 댓글 작성자 id 디버깅
+
+    // 댓글 작성자가 아닌 유저가 다른 경우 수정할 수 없도록 처리
+    if (!userId || authorId !== userId.toString()) {
+        alert('댓글 작성자가 아닙니다.');
+        return false;
+    }
 
     if (newContent !== null && newContent !== '') {
         $.ajax({
             type: 'PUT',
             url: '/Board/Today/' + boardTodayId + '/Reply/' + replyId,
             data: JSON.stringify({
-                "content": newContent,
+                "replyContent": newContent, // 수정한 댓글을 replyContent에 저장
             }),
             contentType: "application/json",
             dataType: "json",
@@ -88,7 +102,7 @@ $(document).on('click', '.replyModify', function() {
             },
             success: function(response) {
                 alert('댓글이 수정되었습니다.');
-                // 수정된 댓글 화면에 반영하는 코드 추가
+                location.reload();
             },
             error: function(xhr) {
                 alert(xhr.responseText);
@@ -116,6 +130,7 @@ $(document).on('click', '.replyDelete', function() {
             xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
         },
         success: function() {
+            alert("댓글을 삭제하시겠습니까 ?");
             // 페이지 새로고침
             location.reload();
         },

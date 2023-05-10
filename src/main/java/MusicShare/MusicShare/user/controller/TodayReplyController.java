@@ -43,8 +43,6 @@ public class TodayReplyController {
         return ResponseEntity.ok(updatedReply);
     }
 
-
-
     // 댓글 삭제
     @DeleteMapping("/Board/Today/{boardTodayId}/Reply/{replyId}")
     public ResponseEntity toDeleteTodayReply(@PathVariable Long boardTodayId, @PathVariable Long replyId) {

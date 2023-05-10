@@ -42,7 +42,6 @@ public class TodayReplyService {
         // 댓글 최신순 정렬
         todayReplyDTOS.sort(Comparator.comparing(TodayReplyDTO::getReplyCreatedTime).reversed());
 
-
         return todayReplyDTOS;
     }
 
@@ -52,9 +51,7 @@ public class TodayReplyService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 댓글이 존재하지 않습니다. " + id));
 
         todayReplyEntity.setReplyContent(todayReplyDTO.getReplyContent());
-
         TodayReplyEntity updatedReply = todayReplyRepository.save(todayReplyEntity);
-
         return new TodayReplyDTO(updatedReply);
     }
 

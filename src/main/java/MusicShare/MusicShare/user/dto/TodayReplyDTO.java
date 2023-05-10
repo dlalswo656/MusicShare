@@ -22,7 +22,7 @@ public class TodayReplyDTO {
     private LocalDateTime replyUpdatedTime;
 
     public TodayReplyDTO(TodayReplyEntity updatedReply) {
-
+        // 기본 생성자
     }
 
     public static TodayReplyDTO toTodayReplyDTO(TodayReplyEntity todayReplyEntity) {
