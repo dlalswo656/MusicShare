@@ -116,10 +116,20 @@ $(document).on('click', '.replyModify', function() {
 $(document).on('click', '.replyDelete', function() {
     var replyId = $(this).closest('.reply-item').data('reply-id'); // 삭제 버튼을 누른 댓글의 id
     const boardTodayId = $('#boardToday-id').val();
+    const userId = $('#user-id').val(); // 로그인한 유저의 id
 
     // CSRF id 값 변수 추가
     var csrfToken = $("meta[name='_csrf']").attr("content");
     var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+    // 댓글 작성자의 id 변수 추가
+    var authorId = $(this).closest('.reply-item').attr('data-reply-author');
+
+    // 댓글 작성자가 아닌 유저가 다른 경우 수정할 수 없도록 처리
+    if (!userId || authorId !== userId.toString()) {
+        alert('댓글 작성자가 아닙니다.');
+        return false;
+    }
 
     // 댓글 삭제 요청 보내기
     $.ajax({
@@ -130,7 +140,7 @@ $(document).on('click', '.replyDelete', function() {
             xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
         },
         success: function() {
-            alert("댓글을 삭제하시겠습니까 ?");
+            alert("댓글을 삭제 하시겠습니까 ?");
             // 페이지 새로고침
             location.reload();
         },

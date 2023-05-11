@@ -55,8 +55,6 @@ public class TodayReplyService {
         return new TodayReplyDTO(updatedReply);
     }
 
-
-
     // 댓글 삭제
     public void delete(Long id) {
 
