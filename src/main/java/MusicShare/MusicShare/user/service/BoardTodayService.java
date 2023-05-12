@@ -19,6 +19,7 @@ public class BoardTodayService {
 
     private final BoardTodayRepository boardTodayRepository;
 
+    // 게시글 작성
     public BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
         return BoardTodayEntity.toBoardTodayEntity(boardTodayDTO, user);
     }

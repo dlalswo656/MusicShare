@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor // 기본 생성자
-@AllArgsConstructor // 모든 필드를 배개변수로 하는 생성자
+@AllArgsConstructor // 모든 필드를 매개변수로 하는 생성자
 public class BoardTodayDTO {
     private Long id; // 게시글 넘버
     private String todayTitle;
