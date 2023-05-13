@@ -3,6 +3,7 @@ package MusicShare.MusicShare.user.controller;
 import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.dto.TodayReplyDTO;
 import MusicShare.MusicShare.user.entity.BoardTodayEntity;
+import MusicShare.MusicShare.user.entity.TodayReplyEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardTodayRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -144,10 +146,12 @@ public class BoardTodayController {
         boardTodayService.UpdateToday(id, boardTodayDTO);
         return "redirect:/Board/Today";
     }
-    
+
+    @Transactional
     // 게시글 삭제
     @GetMapping("/Delete/{id}")
     public String Delete(@PathVariable Long id, HttpSession session) {
+
         // 로그인한 유저 id 값
         Long userId = (Long) session.getAttribute("LoginId");
         Optional<BoardTodayEntity> boardOpt = boardTodayRepository.findById(id);
@@ -157,8 +161,19 @@ public class BoardTodayController {
             if (!boardTodayEntity.getUser().getId().equals(userId)) {
                 return "redirect:/Board/Today";
             }
+
+
+
             // 게시글 삭제
             boardTodayService.Delete(id);
+
+            // 해당 게시글에 달린 모든 댓글 삭제
+            List<TodayReplyEntity> replyList = boardTodayEntity.getReplyList();
+            if (replyList != null && replyList.size() > 0) {
+                for (TodayReplyEntity reply : replyList) {
+                    todayReplyService.delete(reply.getId());
+                }
+            }
     }
         return "redirect:/Board/Today";
     }

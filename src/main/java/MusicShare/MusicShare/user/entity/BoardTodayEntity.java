@@ -33,6 +33,7 @@ public class BoardTodayEntity extends BaseEntity {
     @OneToMany(mappedBy = "today") // TodayReplyEntity에서 JoinColumn
     private List<TodayReplyEntity> replyList = new ArrayList<>();
 
+
     public static BoardTodayEntity toBoardTodayEntity(BoardTodayDTO boardTodayDTO, UserEntity user) {
         BoardTodayEntity boardTodayEntity = new BoardTodayEntity();
         boardTodayEntity.setTodayTitle(boardTodayDTO.getTodayTitle());

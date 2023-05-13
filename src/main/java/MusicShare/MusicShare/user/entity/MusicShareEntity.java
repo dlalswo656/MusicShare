@@ -1,6 +1,5 @@
 package MusicShare.MusicShare.user.entity;
 
-import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.dto.MusicShareDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,6 @@ public class MusicShareEntity extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
-
 
     public static MusicShareEntity toMusicShareEntity(MusicShareDTO musicShareDTO, UserEntity user) {
         MusicShareEntity musicShareEntity = new MusicShareEntity();

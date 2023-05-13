@@ -19,6 +19,12 @@ function moreReplies() {
                            "<td>" + data[i].userName + "</td>" +
                            "<td>" + data[i].replyContent + "</td>" +
                            "<td>" + data[i].replyCreatedTime.replace("T", " ") + "</td>" +
+                           "<td>" +
+                               "<button type='button' class='btn btn-info btn-sm replyModify'>수정</button>" +
+                           "</td>" +
+                           "<td>" +
+                               "<button type='button' class='btn btn-danger btn-sm replyDelete'>삭제</button>" +
+                           "</td>" +
                            "</tr>";
                 $(".table tbody").append(html);  // 가져온 댓글을 출력
             }
