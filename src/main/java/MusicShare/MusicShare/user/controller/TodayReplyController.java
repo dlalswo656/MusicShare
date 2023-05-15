@@ -1,7 +1,6 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.TodayReplyDTO;
-import MusicShare.MusicShare.user.entity.TodayReplyEntity;
 import MusicShare.MusicShare.user.repository.TodayReplyRepository;
 import MusicShare.MusicShare.user.service.TodayReplyService;
 import lombok.RequiredArgsConstructor;
