@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- CSRF -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <meta charset="UTF-8">
+    <title>음악 공유</title>
+    <!-- jquery cdn -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous">
+    </script>
+<!--    <script type="text/javascript" th:src="@{/js/TodayReply.js}"></script>
+    <script type="text/javascript" th:src="@{/js/TodayReplyMore.js}"></script>-->
+
+    <th:block th:replace="inc/header"></th:block>
+</head>
+<body>
+<th:block th:replace="inc/body"></th:block>
+<div class="container mt-5">
+    <table class="table mt-4">
+        <thead class="thead-light">
+        <tr>
+            <th>번호</th>
+            <td th:text="${boardShare.id}"></td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td th:text="${boardShare.shareTitle}"></td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td th:text="${boardShare.userName}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td th:text="${boardShare.shareContent}"></td>
+        </tr>
+        <tr>
+            <th>조회수</th>
+            <td th:text="${boardShare.shareHits}"></td>
+        </tr>
+        <tr>
+            <th>등록 날짜</th>
+            <td th:text="${#temporals.format(boardShare.shareCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr><tr>
+            <th>수정 날짜</th>
+            <td th:text="${#temporals.format(boardShare.shareUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+    <div>
+        <a class="btn btn-primary" th:href="@{/Board/Update/{id}(id=${boardShare.id})}">글 수정</a>
+        <a class="btn btn-info" th:href="@{/Board/Delete/{id}(id=${boardShare.id})}">글 삭제</a>
+    </div>
+
+    <!--&lt;!&ndash; 댓글 &ndash;&gt;
+    <div class="form-group mt-5">
+        <label for="replyContent"></label>
+        <textarea class="form-control" name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요."></textarea>
+        <button class="btn btn-primary" type="button" id="submitTodayReply">댓글 등록</button>
+    </div>
+
+    &lt;!&ndash; 댓글 리스트 &ndash;&gt;
+    <div class="mt-5">
+        <input type="hidden" id="boardToday-id" th:value="${boardToday.id}"/> &lt;!&ndash; 게시글 id &ndash;&gt;
+        <input type="hidden" id="user-id" th:value="${LoginId}"/> &lt;!&ndash; 댓글 작성자 id &ndash;&gt;
+        <input type="hidden" id="user-name" th:value="${LoginName}"/>
+        <input type="hidden" id="reply-createdTime" th:value="${replyCreatedTime}"/>
+        &lt;!&ndash;        <input type="hidden" id="reply-updatedTime" th:value="${replyUpdatedTime}"/>&ndash;&gt;
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>작성 시간</th>
+                &lt;!&ndash;                    <th>수정 시간</th>&ndash;&gt;
+            </tr>
+            </thead>
+            <tbody>
+            &lt;!&ndash; 댓글 리스트를 for-each로 반복하며 출력 &ndash;&gt;
+            <tr th:each="replyList, i : ${replyList}" th:if="${i.index < 5}" class="reply-item" th:data-reply-id="${replyList.id}" th:data-reply-author="${replyList.userId}">
+                <td th:text="${replyList.userName}"></td>
+                <td th:text="${replyList.replyContent}"></td>
+                <td th:text="${#temporals.format(replyList.replyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                &lt;!&ndash; <td th:text="${#temporals.format(replyList.replyUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td> &ndash;&gt;
+
+                &lt;!&ndash; 수정 버튼 &ndash;&gt;
+                <td>
+                    <button type="button" class="btn btn-info btn-sm replyModify">수정</button>
+                </td>
+
+                &lt;!&ndash; 삭제 버튼 &ndash;&gt;
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm replyDelete">삭제</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="button" id="more-btn" class="btn btn-secondary" th:if="${replyList.size() > 5}" onclick="moreReplies()">댓글 더보기</button>
+        </div>
+    </div>-->
+</div>
+</body>
+</html>

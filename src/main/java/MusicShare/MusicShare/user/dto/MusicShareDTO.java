@@ -17,7 +17,7 @@ public class MusicShareDTO {
     private String shareContent;
     private int shareHits;
     private LocalDateTime shareCreatedTime;
-    private LocalDateTime shareUpdateTime;
+    private LocalDateTime shareUpdatedTime;
 
     public static MusicShareDTO toMusicShareDTO(MusicShareEntity musicShareEntity) {
         MusicShareDTO musicShareDTO = new MusicShareDTO();
@@ -26,7 +26,7 @@ public class MusicShareDTO {
         musicShareDTO.setShareContent(musicShareEntity.getShareContent());
         musicShareDTO.setShareHits(musicShareEntity.getShareHits());
         musicShareDTO.setShareCreatedTime(musicShareEntity.getCreatedTime());
-        musicShareDTO.setShareUpdateTime(musicShareEntity.getUpdatedTime());
+        musicShareDTO.setShareUpdatedTime(musicShareEntity.getUpdatedTime());
         musicShareDTO.setUserName(musicShareEntity.getUser().getName());
 
         // 작성자 이름

@@ -162,8 +162,6 @@ public class BoardTodayController {
                 return "redirect:/Board/Today";
             }
 
-
-
             // 게시글 삭제
             boardTodayService.Delete(id);
 
