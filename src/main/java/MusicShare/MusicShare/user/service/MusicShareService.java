@@ -1,8 +1,6 @@
 package MusicShare.MusicShare.user.service;
 
-import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.dto.MusicShareDTO;
-import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import MusicShare.MusicShare.user.entity.MusicShareEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.MusicShareRepository;
