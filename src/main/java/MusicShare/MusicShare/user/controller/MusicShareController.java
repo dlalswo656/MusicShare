@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Controller
@@ -35,8 +36,8 @@ public class MusicShareController {
         // 다음 페이지 넘어가는 링크
         int currentPage = musicShareDTOList.getNumber(); // 현재 페이지 번호
         int totalPages = musicShareDTOList.getTotalPages(); // 전체 페이지
-        int prevPage = currentPage > 0 ? currentPage -1 : 0; // 이전 페이지
-        int nextPage = currentPage + 1 < totalPages ? currentPage + 1 : totalPages -1; // 다음 페이지
+        int prevPage = currentPage > 0 ? currentPage - 1 : 0; // 이전 페이지
+        int nextPage = currentPage + 1 < totalPages ? currentPage + 1 : totalPages - 1; // 다음 페이지
         int startPage = currentPage / 10 * 10 + 1; // 시작 페이지
         int endPage = Math.min(startPage + 9, totalPages); // 끝 페이지
 
@@ -114,4 +115,57 @@ public class MusicShareController {
         return "music/ShareDetail";
     }
 
+    // 게시글 수정
+    @GetMapping("/Update/{id}")
+    public String ShareUpdate(@PathVariable("id") Long id, Model model, HttpSession session) {
+        Optional<MusicShareEntity> shareOpt = musicShareRepository.findById(id);
+        if (shareOpt.isPresent()) {
+            MusicShareEntity musicShareEntity = shareOpt.get();
+            MusicShareDTO musicShareDTO = musicShareService.ShareId(id);
+
+            // 현재 로그인한 사용자의 아이디를 BoardTodayDTO에 설정
+            Long userId = (Long) session.getAttribute("LoginId");
+            if (!musicShareEntity.getUser().getId().equals(userId)) {
+                return "redirect:/Music/Share";
+            }
+
+            musicShareDTO.setUserId(userId);
+            model.addAttribute("shareUpdate", musicShareDTO);
+        }
+        return "music/ShareUpdate";
+    }
+    @PostMapping("/ShareUpdate")
+    public String UpdateShare(Long id, @ModelAttribute MusicShareDTO musicShareDTO) {
+        musicShareService.UpdateShare(id, musicShareDTO);
+        return "redirect:/Music/Share";
+    }
+
+    @Transactional
+    // 게시글 삭제
+    @GetMapping("/Delete/{id}")
+    public String Delete(@PathVariable Long id, HttpSession session) {
+
+        // 로그인한 유저 id 값
+        Long userId = (Long) session.getAttribute("LoginId");
+        Optional<MusicShareEntity> shareOpt = musicShareRepository.findById(id);
+        if (shareOpt.isPresent()) {
+            MusicShareEntity musicShareEntity = shareOpt.get();
+            // 현재 로그인한 사용자가 작성자가 아닌 경우에는 삭제 불가능
+            if (!musicShareEntity.getUser().getId().equals(userId)) {
+                return "redirect:/Music/Share";
+            }
+
+            // 게시글 삭제
+            musicShareService.Delete(id);
+
+            // 해당 게시글에 달린 모든 댓글 삭제
+//            List<TodayReplyEntity> replyList = boardTodayEntity.getReplyList();
+//            if (replyList != null && replyList.size() > 0) {
+//                for (TodayReplyEntity reply : replyList) {
+//                    todayReplyService.delete(reply.getId());
+//                }
+//            }
+        }
+        return "redirect:/Music/Share";
+    }
 }

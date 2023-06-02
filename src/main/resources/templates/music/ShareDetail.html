@@ -46,18 +46,19 @@
         <tr>
             <th>등록 날짜</th>
             <td th:text="${#temporals.format(boardShare.shareCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        </tr><tr>
+        </tr>
+        <tr>
             <th>수정 날짜</th>
             <td th:text="${#temporals.format(boardShare.shareUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
     <div>
-        <a class="btn btn-primary" th:href="@{/Board/Update/{id}(id=${boardShare.id})}">글 수정</a>
-        <a class="btn btn-info" th:href="@{/Board/Delete/{id}(id=${boardShare.id})}">글 삭제</a>
+        <a class="btn btn-primary" th:href="@{/Music/Update/{id}(id=${boardShare.id})}">글 수정</a>
+        <a class="btn btn-info" th:href="@{/Music/Delete/{id}(id=${boardShare.id})}">글 삭제</a>
     </div>
 
-    <!--&lt;!&ndash; 댓글 &ndash;&gt;
-    <div class="form-group mt-5">
+    <!-- 댓글 -->
+    <!--<div class="form-group mt-5">
         <label for="replyContent"></label>
         <textarea class="form-control" name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요."></textarea>
         <button class="btn btn-primary" type="button" id="submitTodayReply">댓글 등록</button>

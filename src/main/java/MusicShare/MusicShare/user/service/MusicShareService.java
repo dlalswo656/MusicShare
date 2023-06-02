@@ -1,6 +1,8 @@
 package MusicShare.MusicShare.user.service;
 
+import MusicShare.MusicShare.user.dto.BoardTodayDTO;
 import MusicShare.MusicShare.user.dto.MusicShareDTO;
+import MusicShare.MusicShare.user.entity.BoardTodayEntity;
 import MusicShare.MusicShare.user.entity.MusicShareEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.MusicShareRepository;
@@ -55,5 +57,28 @@ public class MusicShareService {
         } else {
             return null;
         }
+    }
+
+    // 게시글 수정
+    public void UpdateShare(Long id, MusicShareDTO musicShareDTO) {
+        Optional<MusicShareEntity> optionalMusicShareEntity = musicShareRepository.findById(id);
+
+        if (optionalMusicShareEntity.isPresent()) {
+            MusicShareEntity musicShareEntity = optionalMusicShareEntity.get();
+
+            // 수정 정보 설정
+            musicShareEntity.setShareContent(musicShareDTO.getShareContent());
+
+            // 저장
+            musicShareRepository.save(musicShareEntity);
+        } else {
+            System.out.println("게시글 수정 실패");
+        }
+    }
+
+    // 게시글 삭제
+    public void Delete(Long id) {
+
+        musicShareRepository.deleteById(id);
     }
 }
