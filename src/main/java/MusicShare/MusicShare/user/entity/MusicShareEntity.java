@@ -38,4 +38,13 @@ public class MusicShareEntity extends BaseEntity{
 
         return musicShareEntity;
     }
+
+    public static MusicShareEntity toUpdateShareEntity(MusicShareDTO musicShareDTO) {
+        MusicShareEntity musicShareEntity = new MusicShareEntity();
+        musicShareEntity.setId(musicShareDTO.getId());
+        musicShareEntity.setShareTitle(musicShareDTO.getShareTitle());
+        musicShareEntity.setShareContent(musicShareDTO.getShareContent());
+        musicShareEntity.setShareHits(musicShareDTO.getShareHits());
+        return musicShareEntity;
+    }
 }

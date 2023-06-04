@@ -1,7 +1,6 @@
 package MusicShare.MusicShare.user.dto;
 
 import MusicShare.MusicShare.user.entity.ShareReplyEntity;
-import MusicShare.MusicShare.user.entity.TodayReplyEntity;
 import lombok.*;
 import org.springframework.stereotype.Component;
 

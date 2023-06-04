@@ -13,8 +13,8 @@
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
             crossorigin="anonymous">
     </script>
-<!--    <script type="text/javascript" th:src="@{/js/TodayReply.js}"></script>
-    <script type="text/javascript" th:src="@{/js/TodayReplyMore.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/ShareReply.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ShareReplyMore.js}"></script>
 
     <th:block th:replace="inc/header"></th:block>
 </head>
@@ -58,19 +58,19 @@
     </div>
 
     <!-- 댓글 -->
-    <!--<div class="form-group mt-5">
+    <div class="form-group mt-5">
         <label for="replyContent"></label>
         <textarea class="form-control" name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요."></textarea>
-        <button class="btn btn-primary" type="button" id="submitTodayReply">댓글 등록</button>
+        <button class="btn btn-primary" type="button" id="submitShareReply">댓글 등록</button>
     </div>
 
-    &lt;!&ndash; 댓글 리스트 &ndash;&gt;
+    <!-- 댓글 리스트 -->
     <div class="mt-5">
-        <input type="hidden" id="boardToday-id" th:value="${boardToday.id}"/> &lt;!&ndash; 게시글 id &ndash;&gt;
-        <input type="hidden" id="user-id" th:value="${LoginId}"/> &lt;!&ndash; 댓글 작성자 id &ndash;&gt;
+        <input type="hidden" id="boardShare-id" th:value="${boardShare.id}"/> <!-- 게시글 id -->
+        <input type="hidden" id="user-id" th:value="${LoginId}"/> <!-- 댓글 작성자 id -->
         <input type="hidden" id="user-name" th:value="${LoginName}"/>
         <input type="hidden" id="reply-createdTime" th:value="${replyCreatedTime}"/>
-        &lt;!&ndash;        <input type="hidden" id="reply-updatedTime" th:value="${replyUpdatedTime}"/>&ndash;&gt;
+        <!--        <input type="hidden" id="reply-updatedTime" th:value="${replyUpdatedTime}"/>-->
 
         <table class="table table-striped">
             <thead>
@@ -78,23 +78,23 @@
                 <th>작성자</th>
                 <th>내용</th>
                 <th>작성 시간</th>
-                &lt;!&ndash;                    <th>수정 시간</th>&ndash;&gt;
+                <!--                    <th>수정 시간</th>-->
             </tr>
             </thead>
             <tbody>
-            &lt;!&ndash; 댓글 리스트를 for-each로 반복하며 출력 &ndash;&gt;
+            <!-- 댓글 리스트를 for-each로 반복하며 출력 -->
             <tr th:each="replyList, i : ${replyList}" th:if="${i.index < 5}" class="reply-item" th:data-reply-id="${replyList.id}" th:data-reply-author="${replyList.userId}">
                 <td th:text="${replyList.userName}"></td>
                 <td th:text="${replyList.replyContent}"></td>
                 <td th:text="${#temporals.format(replyList.replyCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                &lt;!&ndash; <td th:text="${#temporals.format(replyList.replyUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td> &ndash;&gt;
+                <!-- <td th:text="${#temporals.format(replyList.replyUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
 
-                &lt;!&ndash; 수정 버튼 &ndash;&gt;
+                <!-- 수정 버튼 -->
                 <td>
                     <button type="button" class="btn btn-info btn-sm replyModify">수정</button>
                 </td>
 
-                &lt;!&ndash; 삭제 버튼 &ndash;&gt;
+                <!-- 삭제 버튼 -->
                 <td>
                     <button type="button" class="btn btn-danger btn-sm replyDelete">삭제</button>
                 </td>
@@ -104,7 +104,7 @@
         <div class="text-center">
             <button type="button" id="more-btn" class="btn btn-secondary" th:if="${replyList.size() > 5}" onclick="moreReplies()">댓글 더보기</button>
         </div>
-    </div>-->
+    </div>
 </div>
 </body>
 </html>

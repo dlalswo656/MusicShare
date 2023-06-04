@@ -1,9 +1,9 @@
 $(document).ready(function() {
-  $('#submitTodayReply').on('click', submitTodayReply);
+  $('#submitShareReply').on('click', submitShareReply);
 });
 
-function submitTodayReply() {
-    const boardTodayId = $('#boardToday-id').val();
+function submitShareReply() {
+    const boardShareId = $('#boardShare-id').val();
     const commentInput = $('#replyContent'); // 텍스트 입력공간
     const commentText = commentInput.val();
     const userId = $('#user-id').val();
@@ -13,7 +13,7 @@ function submitTodayReply() {
     // 값들을 변수에 잘 가져오는 지 디버깅
     console.log('commentInput:', commentInput.val());
     console.log("뭐가 문제니 ?" + userId);
-    console.log("뭐가 문제니 ?" + boardTodayId);
+    console.log("뭐가 문제니 ?" + boardShareId);
     console.log("유저 이름" + userName);
 
     // 비로그인 유저가 댓글 버튼을 누를 시 Login 페이지로
@@ -35,7 +35,7 @@ function submitTodayReply() {
     // 댓글 등록 ajax
     $.ajax({
         type: 'POST',
-        url: '/Board/Today/' + boardTodayId + '/Reply',
+        url: '/Music/Share/' + boardShareId + '/Reply',
         contentType: 'application/json',
         // CSRF 변수 값 가져오기
         beforeSend: function(xhr) {
@@ -44,7 +44,7 @@ function submitTodayReply() {
         data: JSON.stringify({
         userId: userId,
         userName: userName,
-        boardTodayId: boardTodayId,
+        boardShareId: boardShareId,
         replyContent: commentText, // 댓글 입력한 것
         replyCreatedTime: replyCreatedTime // 댓글 작성 시간
 //        replyUpdatedTime: replyUpdatedTime // 댓글 수정 시간
@@ -52,7 +52,7 @@ function submitTodayReply() {
         success: function(response) {
             console.log('댓글이 등록되었습니다.');
             commentInput.val(''); // 페이지 새로고침
-            window.location.href = "/Board/Today/" + boardTodayId // 댓글 작성 후 페이지 상단으로
+            window.location.href = "/Music/Share/" + boardShareId // 댓글 작성 후 페이지 상단으로
         },
         error: function(error) {
             console.log('오류:', error);
