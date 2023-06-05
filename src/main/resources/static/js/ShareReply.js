@@ -55,20 +55,9 @@ function submitShareReply() {
             window.location.href = "/Music/Share/" + boardShareId // 댓글 작성 후 페이지 상단으로
         },
         error: function(error) {
-            console.log('오류:', error);
+            console.log('오류 상태 : ', status);
+            console.log('오류 메시지 : ', error);
             alert('오류: ' + error.responseText);
     }
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-

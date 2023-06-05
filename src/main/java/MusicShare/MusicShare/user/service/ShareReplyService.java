@@ -53,6 +53,6 @@ public class ShareReplyService {
 
     // 댓글 삭제
     public void delete(Long id) {
-        musicShareRepository.deleteById(id);
+        shareReplyRepository.deleteById(id);
     }
 }

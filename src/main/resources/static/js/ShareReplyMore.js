@@ -1,4 +1,4 @@
-/*// 댓글 수정
+// 댓글 수정
 $(document).on('click', '.replyModify', function() {
     var replyId = $(this).closest('.reply-item').data('reply-id');
     var newContent = prompt("수정할 내용을 입력하세요.");
@@ -131,4 +131,4 @@ function moreReplies() {
             console.error(xhr.responseText);
         }
     });
-}*/
+}

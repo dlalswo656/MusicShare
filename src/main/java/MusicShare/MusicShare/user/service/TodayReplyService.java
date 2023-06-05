@@ -53,7 +53,6 @@ public class TodayReplyService {
 
     // 댓글 삭제
     public void delete(Long id) {
-
         todayReplyRepository.deleteById(id);
     }
 }

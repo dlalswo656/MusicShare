@@ -3,6 +3,7 @@ package MusicShare.MusicShare.user.controller;
 import MusicShare.MusicShare.user.dto.MusicShareDTO;
 import MusicShare.MusicShare.user.dto.ShareReplyDTO;
 import MusicShare.MusicShare.user.entity.MusicShareEntity;
+import MusicShare.MusicShare.user.entity.ShareReplyEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.MusicShareRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
@@ -164,12 +165,12 @@ public class MusicShareController {
             musicShareService.Delete(id);
 
             // 해당 게시글에 달린 모든 댓글 삭제
-//            List<TodayReplyEntity> replyList = boardTodayEntity.getReplyList();
-//            if (replyList != null && replyList.size() > 0) {
-//                for (TodayReplyEntity reply : replyList) {
-//                    todayReplyService.delete(reply.getId());
-//                }
-//            }
+            List<ShareReplyEntity> replyList = musicShareEntity.getReplyList();
+            if (replyList != null && replyList.size() > 0) {
+                for (ShareReplyEntity reply : replyList) {
+                    shareReplyService.delete(reply.getId());
+                }
+            }
         }
 
         return "redirect:/Music/Share";

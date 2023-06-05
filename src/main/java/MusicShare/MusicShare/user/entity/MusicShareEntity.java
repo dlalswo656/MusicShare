@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +30,9 @@ public class MusicShareEntity extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @OneToMany(mappedBy = "share") // ShareReplyEntity에서 JoinColumn
+    private List<ShareReplyEntity> replyList = new ArrayList<>();
 
     public static MusicShareEntity toMusicShareEntity(MusicShareDTO musicShareDTO, UserEntity user) {
         MusicShareEntity musicShareEntity = new MusicShareEntity();

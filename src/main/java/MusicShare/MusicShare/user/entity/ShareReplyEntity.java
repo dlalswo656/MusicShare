@@ -40,7 +40,7 @@ public class ShareReplyEntity extends BaseEntity{
         shareReplyEntity.setReplyContent(shareReplyDTO.getReplyContent());
 
         if (shareReplyDTO.getUserId() != null) {
-            Optional<UserEntity> userOpt = userRepository.findById(shareReplyDTO.getId());
+            Optional<UserEntity> userOpt = userRepository.findById(shareReplyDTO.getUserId());
             userOpt.ifPresent(shareReplyEntity::setUser);
         }
 
