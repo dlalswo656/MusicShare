@@ -12,6 +12,7 @@ public class NoticeController {
     // 공지사항
     @GetMapping("/Notice")
     public String Notice() {
+
         return "admin/Notice";
     }
 }
