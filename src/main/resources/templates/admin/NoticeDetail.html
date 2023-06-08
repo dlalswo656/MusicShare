@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- CSRF -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <!-- jquery cdn -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+            crossorigin="anonymous">
+    </script>
+<!--    <script type="text/javascript" th:src="@{/js/TodayReply.js}"></script>
+    <script type="text/javascript" th:src="@{/js/TodayReplyMore.js}"></script>-->
+
+    <th:block th:replace="inc/header"></th:block>
+</head>
+<body>
+<th:block th:replace="inc/body"></th:block>
+<div class="container mt-5">
+    <table class="table mt-4">
+        <thead class="thead-light">
+        <tr>
+            <th>번호</th>
+            <td th:text="${boardNotice.id}"></td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td th:text="${boardNotice.noticeTitle}"></td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td th:text="${boardNotice.userName}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td th:text="${boardNotice.noticeContent}"></td>
+        </tr>
+        <tr>
+            <th>조회수</th>
+            <td th:text="${boardNotice.noticeHits}"></td>
+        </tr>
+        <tr>
+            <th>등록 날짜</th>
+            <td th:text="${#temporals.format(boardNotice.noticeCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr><tr>
+            <th>수정 날짜</th>
+            <td th:text="${#temporals.format(boardNotice.noticeUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+    <div>
+        <a class="btn btn-primary" th:href="@{/Board/Notice/Update/{id}(id=${boardNotice.id})}">글 수정</a>
+        <a class="btn btn-info" th:href="@{/Board/Notice/Delete/{id}(id=${boardNotice.id})}">글 삭제</a>
+    </div>
+
+</div>
+</body>
+</html>

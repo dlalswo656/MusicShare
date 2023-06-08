@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 수정</title>
+  <th:block th:replace="inc/header"></th:block>
+</head>
+<body>
+<th:block th:replace="inc/body"></th:block>
+<form action="/Board/Notice/NoticeUpdate" method="post" name="NoticeUpdate">
+  <!-- CSRF 토큰 가져옴 -->
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  <div class="container mt-5">
+    <table class="table mt-4">
+      <thead class="thead-light">
+      <input type="hidden" name="id" th:value="${noticeUpdate.id}">
+      <tr>
+        <th>번호</th>
+        <td th:text="${noticeUpdate.id}"></td>
+      </tr>
+      <tr>
+        <th>제목</th>
+        <td th:text="${noticeUpdate.noticeTitle}" name="noticeTitle" disabled></td>
+      </tr>
+      <tr>
+        <th>작성자</th>
+        <td th:text="${noticeUpdate.userName}" name="userName" disabled></td>
+      </tr>
+      <tr>
+        <th>내용</th>
+        <td><input type="text" name="noticeContent" th:value="${noticeUpdate.noticeContent}" textarea></td>
+      </tr>
+      <tr>
+        <th>조회수</th>
+        <td th:text="${noticeUpdate.noticeHits}" name="noticeHits" disabled></td>
+      </tr>
+      <tr>
+        <th>등록 날짜</th>
+        <td th:text="${#temporals.format(noticeUpdate.noticeCreatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
+      </tr>
+      <tr>
+        <th>수정 날짜</th>
+        <td th:text="${#temporals.format(noticeUpdate.noticeUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}" disabled></td>
+      </tr>
+      </thead>
+    </table>
+    <button type="submit" class="btn btn-primary">글수정</button>
+  </div>
+</form>
+</body>
+</html>

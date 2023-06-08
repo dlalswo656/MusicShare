@@ -8,7 +8,7 @@
 </head>
 <body>
 <th:block th:replace="inc/body"></th:block>
-<!--<form action="/Notice" method="post">
+<form action="/Notice" method="post">
     <div class="container mt-5">
         <table class="table mt-4">
             <thead class="thead-light">
@@ -23,23 +23,23 @@
             </tr>
             </thead>
             <tbodY>
-            <tr th:each="musicShareList: ${musicShareList}">
-                <td><a th:href="@{|/Music/Share/${musicShareList.id}|}" th:text="${musicShareList.id}"></a></td>
-                <td th:text="${musicShareList.shareTitle}"></td>
-                <td th:text="${musicShareList.userName}"></td>
-                <td th:text="${musicShareList.shareContent}"></td>
-                <th th:text="${musicShareList.shareHits}"></th>
-                <td th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+            <tr th:each="boardNoticeList: ${boardNoticeList}">
+                <td><a th:href="@{|/Board/Notice/${boardNoticeList.id}|}" th:text="${boardNoticeList.id}"></a></td>
+                <td th:text="${boardNoticeList.noticeTitle}"></td>
+                <td th:text="${boardNoticeList.userName}"></td>
+                <td th:text="${boardNoticeList.noticeContent}"></td>
+                <th th:text="${boardNoticeList.noticeHits}"></th>
+                <td th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbodY>
         </table>
     </div>
     <div class="container mt-5">
-        <a class="btn btn-primary" href="/Music/ShareWrite">글작성</a>
+        <a class="btn btn-primary" href="/Board/NoticeWrite">글작성</a>
     </div>
 
-    &lt;!&ndash; 페이징 &ndash;&gt;
+    <!-- 페이징 -->
     <div class="container mt-5">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -61,6 +61,6 @@
             </ul>
         </nav>
     </div>
-</form>-->
+</form>
 </body>
 </html>
