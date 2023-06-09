@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/Board")
