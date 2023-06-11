@@ -3,7 +3,6 @@ package MusicShare.MusicShare.user.entity;
 import MusicShare.MusicShare.user.dto.MusicShareDTO;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

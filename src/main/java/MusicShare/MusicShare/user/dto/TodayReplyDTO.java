@@ -3,7 +3,6 @@ package MusicShare.MusicShare.user.dto;
 import MusicShare.MusicShare.user.entity.TodayReplyEntity;
 import lombok.*;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 
 @Getter
