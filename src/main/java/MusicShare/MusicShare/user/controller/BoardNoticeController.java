@@ -1,11 +1,13 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.BoardNoticeDTO;
+import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.entity.BoardNoticeEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardNoticeRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.BoardNoticeService;
+import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,13 +59,18 @@ public class BoardNoticeController {
 
     // 게시글 작성
     @GetMapping("/NoticeWrite")
-    public String NoticeWrite(BoardNoticeDTO boardNoticeDTO, HttpSession session) {
+    public String NoticeWrite(BoardNoticeDTO boardNoticeDTO, HttpSession session, Model model) {
 
         // 비로그인 유저가 글작성을 누르면 Login
         Long LoginId = (Long) session.getAttribute("LoginId");
-        if (LoginId == null) {
+        String UserRole = (String) session.getAttribute("LoginRole"); // 사용자의 Role 값
+
+        if (LoginId == null) { // Role 값이 "admin"이 아닌 경우에도 제한
             return "redirect:/Login";
         }
+
+        model.addAttribute("UserRole", UserRole); // Role 값을 모델에 추가
+
         return "admin/NoticeWrite";
     }
 
