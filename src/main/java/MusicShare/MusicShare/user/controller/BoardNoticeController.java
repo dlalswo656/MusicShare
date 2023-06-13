@@ -65,7 +65,9 @@ public class BoardNoticeController {
         Long LoginId = (Long) session.getAttribute("LoginId");
         String UserRole = (String) session.getAttribute("LoginRole"); // 사용자의 Role 값
 
-        if (LoginId == null) { // Role 값이 "admin"이 아닌 경우에도 제한
+        System.out.println("역할" + UserRole);
+
+        if (LoginId == null) {
             return "redirect:/Login";
         }
 

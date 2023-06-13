@@ -30,12 +30,12 @@
                 <td th:text="${boardNoticeList.noticeContent}"></td>
                 <th th:text="${boardNoticeList.noticeHits}"></th>
                 <td th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(boardNoticeList.noticeUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbodY>
         </table>
     </div>
-    <div class="container mt-5" th:if="${session.getAttribute('LoginRole') == 'admin'}">
+    <div class="container mt-5" th:if="${session.LoginRole == 'Admin'}">
         <a class="btn btn-primary" href="/Board/NoticeWrite">글작성</a>
     </div>
 

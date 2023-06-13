@@ -51,7 +51,7 @@
             <td th:text="${#temporals.format(boardNotice.noticeUpdatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
-    <div>
+    <div th:if="${session.LoginRole == 'Admin'}">
         <a class="btn btn-primary" th:href="@{/Board/Notice/Update/{id}(id=${boardNotice.id})}">글 수정</a>
         <a class="btn btn-info" th:href="@{/Board/Notice/Delete/{id}(id=${boardNotice.id})}">글 삭제</a>
     </div>

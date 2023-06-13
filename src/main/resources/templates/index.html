@@ -55,11 +55,6 @@
                     </a>
                 </li>
 
-                <!-- User 로그인 후 -->
-                <!--<li class="nav-item" th:if="${session.LoginRole == 'User'}">
-                    <a class="nav-link" th:href="@{/User/{id}(id=${session.LoginUser.id})}" th:text="${session.LoginUser.email}" style="font-size: 0.8rem;"></a>
-                </li> th:href와 th:text 같은 a 태그에 사용하면 th:href속성에 의해 th:text가 덮어쓰여지므로 span 태그를 써서 2개를 나눈다 -->
-
                 <!-- Admin 로그인 후 -->
                 <li class="nav-item" th:if="${session.LoginRole == 'Admin'}">
                     <a class="nav-link" th:href="@{/User/{id}(id=${session.LoginUser.id})}" style="font-size: 0.8rem;">

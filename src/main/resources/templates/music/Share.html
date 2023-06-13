@@ -30,7 +30,7 @@
                 <td th:text="${musicShareList.shareContent}"></td>
                 <th th:text="${musicShareList.shareHits}"></th>
                 <td th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(musicShareList.shareUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbodY>
         </table>
