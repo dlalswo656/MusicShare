@@ -71,15 +71,86 @@
     </div>
 </nav>
 
-<!-- 게시물 목록 -->
-<ul class="list-group">
-    <li class="list-group-item">
-        <a href="/Board/1">게시물 제목</a>
-        <span class="text-muted">작성자</span>
-        <span class="text-muted">작성일</span>
-    </li>
-    <!-- 추가적인 게시물들도 동일한 형식으로 추가 -->
-</ul>
+<!-- 중앙 -->
+<div class="container">
+    <h2 class="section-title">오늘의 음악</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>조회수</th>
+                <th>등록 날짜</th>
+                <th>수정 날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="boardTodayList: ${boardTodayList}" th:if="${boardTodayListStat.index % 5 == 0}">
+                <td><a th:href="@{|/Board/Today/${boardTodayList.id}|}" th:text="${boardTodayList.id}"></a></td>
+                <td th:text="${boardTodayList.todayTitle}"></td>
+                <td th:text="${boardTodayList.userName}"></td>
+                <td th:text="${boardTodayList.todayContent}"></td>
+                <td th:text="${boardTodayList.todayHits}"></td>
+                <td th:text="${#temporals.format(boardTodayList.todayCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(boardTodayList.todayUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
 
+    <h2 class="section-title">음악 공유</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>조회수</th>
+                <th>등록 날짜</th>
+                <th>수정 날짜</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="musicShareList: ${musicShareList}" th:if="${musicShareListStat.index % 5 == 0}">
+                <td><a th:href="@{|/Music/Share/${musicShareList.id}|}" th:text="${musicShareList.id}"></a></td>
+                <td th:text="${musicShareList.shareTitle}"></td>
+                <td th:text="${musicShareList.userName}"></td>
+                <td th:text="${musicShareList.shareContent}"></td>
+                <td th:text="${musicShareList.shareHits}"></td>
+                <td th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(musicShareList.shareUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="section-title">공지사항</h2>
+    <table class="table mt-4">
+        <thead class="thead-light">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>조회수</th>
+                <th>등록 날짜</th>
+                <th>수정 날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="boardNoticeList: ${boardNoticeList}">
+                <td><a th:href="@{|/Board/Notice/${boardNoticeList.id}|}" th:text="${boardNoticeList.id}"></a></td>
+                <td th:text="${boardNoticeList.noticeTitle}"></td>
+                <td th:text="${boardNoticeList.userName}"></td>
+                <td th:text="${boardNoticeList.noticeContent}"></td>
+                <th th:text="${boardNoticeList.noticeHits}"></th>
+                <td th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(boardNoticeList.noticeUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

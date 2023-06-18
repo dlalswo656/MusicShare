@@ -1,10 +1,14 @@
 package MusicShare.MusicShare.user.controller;
 
+import MusicShare.MusicShare.user.dto.BoardNoticeDTO;
+import MusicShare.MusicShare.user.dto.BoardTodayDTO;
+import MusicShare.MusicShare.user.dto.MusicShareDTO;
 import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.repository.UserRepository;
-import MusicShare.MusicShare.user.service.EmailService;
-import MusicShare.MusicShare.user.service.UserService;
+import MusicShare.MusicShare.user.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -20,10 +24,21 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final EmailService emailService;
+    private final BoardTodayService boardTodayService;
+    private final MusicShareService musicShareService;
+    private final BoardNoticeService boardNoticeService;
 
     // Home
-    @GetMapping("/index")
-    public String Home() {
+    @GetMapping("/")
+    public String Home(Model model, Pageable pageable) {
+        Page<BoardTodayDTO> boardTodayDTOList = boardTodayService.findAll(pageable);
+        Page<MusicShareDTO> musicShareDTOList = musicShareService.findAll(pageable);
+        Page<BoardNoticeDTO> noticeDTOList = boardNoticeService.findAll(pageable);
+
+        model.addAttribute("boardTodayList", boardTodayDTOList);
+        model.addAttribute("musicShareList", musicShareDTOList);
+        model.addAttribute("boardNoticeList", noticeDTOList);
+
         return "index";
     }
 

@@ -1,13 +1,11 @@
 package MusicShare.MusicShare.user.controller;
 
 import MusicShare.MusicShare.user.dto.BoardNoticeDTO;
-import MusicShare.MusicShare.user.dto.UserDTO;
 import MusicShare.MusicShare.user.entity.BoardNoticeEntity;
 import MusicShare.MusicShare.user.entity.UserEntity;
 import MusicShare.MusicShare.user.repository.BoardNoticeRepository;
 import MusicShare.MusicShare.user.repository.UserRepository;
 import MusicShare.MusicShare.user.service.BoardNoticeService;
-import MusicShare.MusicShare.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
