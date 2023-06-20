@@ -5,9 +5,12 @@ import MusicShare.MusicShare.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.MimeMessage;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -34,11 +37,18 @@ public class EmailService {
     }
 
     private void sendEmail(String email, String newPassword) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("임시 비밀번호 발급");
-        message.setText("임시 비밀번호는 " + newPassword + "입니다.");
-        javaMailSender.send(message);
+        MimeMessage message = javaMailSender.createMimeMessage();   // MimeMessage 를 사용하여 HTML 태그를 사용하지 않는 일반 텍스트 이메일로 설정
+        MimeMessageHelper helper;
+
+        try {
+            helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setTo(email);
+            helper.setSubject("임시 비밀번호 발급");
+            helper.setText("임시 비밀번호는 " + newPassword + "입니다.", false);
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            // 예외 처리
+        }
     }
 
     private String generateNewPassword() {
