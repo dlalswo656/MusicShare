@@ -76,7 +76,7 @@
     <div class="row">
         <div class="col-md-4">
             <h2 class="section-title">오늘의 음악</h2>
-            <table class="table table-striped">
+            <table class="table table-mt-4">
                 <thead>
                     <tr>
                         <th style="width: 5%;">번호</th>
@@ -90,22 +90,22 @@
                 </thead>
                 <tbody>
                     <tr th:each="boardTodayList: ${boardTodayList}" th:if="${boardTodayListStat.index lt 5}">
-                        <td class="text-nowrap" style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;"><a th:href="@{|/Board/Today/${boardTodayList.id}|}" th:text="${boardTodayList.id}" th:limit="5"></a></td>
-                        <td class="text-nowrap" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.todayTitle}"></td>
-                        <td class="text-nowrap" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.userName}"></td>
-                        <td class="text-nowrap" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.todayContent}"></td>
-                        <td class="text-nowrap" style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.todayHits}"></td>
-                        <td class="text-nowrap" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardTodayList.todayCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                        <td class="text-nowrap" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardTodayList.todayUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;"><a th:href="@{|/Board/Today/${boardTodayList.id}|}" th:text="${boardTodayList.id}" th:limit="5"></a></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.todayTitle}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.userName}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.todayContent}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardTodayList.todayHits}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardTodayList.todayCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardTodayList.todayUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
                     </tr>
                 </tbody>
             </table>
             <img th:src="@{/img/todaymusic.png}" alt="TodayMusic" style="max-width: 100%; height: auto;">
-        </div>
+<!--        </div>-->
 
-        <div class="col-md-4">
+<!--        <div class="col-md-4">-->
             <h2 class="section-title">음악 공유</h2>
-            <table class="table table-striped">
+            <table class="table table-mt-4"><!-- striped -->
                 <thead>
                     <tr>
                         <th style="width: 5%;">번호</th>
@@ -119,20 +119,20 @@
                 </thead>
                 <tbody>
                     <tr th:each="musicShareList: ${musicShareList}" th:if="${musicShareListStat.index lt 5}">
-                        <td class="text-nowrap" style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;"><a th:href="@{|/Music/Share/${musicShareList.id}|}" th:text="${musicShareList.id}" th:limit="5"></a></td>
-                        <td class="text-nowrap" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.shareTitle}"></td>
-                        <td class="text-nowrap" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.userName}"></td>
-                        <td class="text-nowrap" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.shareContent}"></td>
-                        <td class="text-nowrap" style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.shareHits}"></td>
-                        <td class="text-nowrap" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                        <td class="text-nowrap" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(musicShareList.shareUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;"><a th:href="@{|/Music/Share/${musicShareList.id}|}" th:text="${musicShareList.id}" th:limit="5"></a></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.shareTitle}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.userName}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.shareContent}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${musicShareList.shareHits}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(musicShareList.shareCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(musicShareList.shareUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
                     </tr>
                 </tbody>
             </table>
             <img th:src="@{/img/sharemusic.png}" alt="ShareMusic" style="max-width: 100%; height: auto;">
-        </div>
+<!--        </div>-->
 
-        <div class="col-md-4">
+<!--        <div class="col-md-4">-->
             <h2 class="section-title">공지사항</h2>
             <table class="table mt-4">
                 <thead>
@@ -149,12 +149,12 @@
                 <tbody>
                 <tr th:each="boardNoticeList: ${boardNoticeList}" th:if="${boardNoticeListStat.index lt 5}">
                     <td><a th:href="@{|/Board/Notice/${boardNoticeList.id}|}" th:text="${boardNoticeList.id}"></a></td>
-                    <td class="text-nowrap" style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.noticeTitle}"></td>
-                    <td class="text-nowrap" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.userName}"></td>
-                    <td class="text-nowrap" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.noticeContent}"></td>
-                    <td class="text-nowrap" style="max-width: 50px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.noticeHits}"></td>
-                    <td class="text-nowrap" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
-                    <td class="text-nowrap" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardNoticeList.noticeUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.noticeTitle}"></td>
+                    <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.userName}"></td>
+                    <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.noticeContent}"></td>
+                    <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${boardNoticeList.noticeHits}"></td>
+                    <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardNoticeList.noticeCreatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td class="text-nowrap" style="max-width: 10px; overflow: hidden; text-overflow: ellipsis;" th:text="${#temporals.format(boardNoticeList.noticeUpdatedTime, 'yyyy-MM-dd HH:mm')}"></td>
                 </tr>
                 </tbody>
             </table>
