@@ -67,23 +67,27 @@ $(document).on('click', '.replyDelete', function() {
     }
 
     // 댓글 삭제 요청 보내기
-    $.ajax({
-        url: "/Music/Share/" + boardShareId + "/Reply/" + replyId,
-        type: "DELETE",
-        // CSRF 변수 값 가져오기
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
-        },
-        success: function() {
-            alert("댓글을 삭제 하시겠습니까 ?");
-            // 페이지 새로고침
-            location.reload();
-        },
-        error: function() {
-            alert("댓글 삭제에 실패했습니다.");
-            error
-        }
-    });
+    if (confirm("댓글을 삭제 하시겠습니까?")) {
+        $.ajax({
+            url: "/Music/Share/" + boardShareId + "/Reply/" + replyId,
+            type: "DELETE",
+            // CSRF 변수 값 가져오기
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
+            },
+            success: function() {
+                alert("댓글이 삭제되었습니다.");
+                // 페이지 새로고침
+                location.reload();
+            },
+            error: function() {
+                alert("댓글 삭제에 실패했습니다.");
+            }
+        });
+    } else {
+        // 삭제 취소
+        return false;
+    }
 });
 
 // 댓글 더보기

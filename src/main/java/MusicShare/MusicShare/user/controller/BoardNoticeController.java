@@ -9,6 +9,7 @@ import MusicShare.MusicShare.user.service.BoardNoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,27 @@ public class BoardNoticeController {
         // 페이징
         Page<BoardNoticeDTO> noticeDTOList = boardNoticeService.findAll(pageable);
 
+// 다음 페이지로 넘어가는 링크 생성 코드
+        int currentPage = noticeDTOList.getNumber(); // 현재 페이지 번호
+        int totalPages = noticeDTOList.getTotalPages(); // 전체 페이지
+        int prevPage = currentPage > 0 ? currentPage -1 : 0; // 이전 페이지
+        int nextPage = currentPage + 1 < totalPages ? currentPage + 1 : currentPage; // 다음 페이지 (수정)
+        int startPage = currentPage / 10 * 10 + 1; // 시작 페이지
+        int endPage = Math.min(startPage + 9, totalPages); // 끝 페이지
+        String url = "/Board/Notice?page="; // 다음 페이지로 넘어가는 링크 URL
+
+        model.addAttribute("currentPage", currentPage); // 현재 페이지
+        model.addAttribute("totalPages", totalPages); // 전체 페이지
+        model.addAttribute("prevPageUrl", prevPage); // 이전 페이지
+        model.addAttribute("nextPageUrl", nextPage); // 다음 페이지
+        model.addAttribute("startPage", startPage); // 시작 페이지
+        model.addAttribute("endPage", endPage); // 끝 페이지
+        model.addAttribute("url", url);
+
+
+        /*// 페이징
+        Page<BoardNoticeDTO> noticeDTOList = boardNoticeService.findAll(pageable);
+
         // 다음 페이지로 넘어가는 링크 생성 코드
         int currentPage = noticeDTOList.getNumber(); // 현재 페이지 번호
         int totalPages = noticeDTOList.getTotalPages(); // 전체 페이지
@@ -48,7 +70,7 @@ public class BoardNoticeController {
         model.addAttribute("nextPageUrl", nextPage); // 다음 페이지
         model.addAttribute("startPage", startPage); // 시작 페이지
         model.addAttribute("endPage", endPage); // 끝 페이지
-        model.addAttribute("url", url);
+        model.addAttribute("url", url);*/
 
         // DB에 게시글 데이터를 가져옴
         model.addAttribute("boardNoticeList", noticeDTOList);

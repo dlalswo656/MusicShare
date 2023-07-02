@@ -46,7 +46,6 @@ $(document).on('click', '.replyModify', function() {
     }
 });
 
-
 // 댓글 삭제
 $(document).on('click', '.replyDelete', function() {
     var replyId = $(this).closest('.reply-item').data('reply-id'); // 삭제 버튼을 누른 댓글의 id
@@ -67,23 +66,27 @@ $(document).on('click', '.replyDelete', function() {
     }
 
     // 댓글 삭제 요청 보내기
-    $.ajax({
-        url: "/Board/Today/" + boardTodayId + "/Reply/" + replyId,
-        type: "DELETE",
-        // CSRF 변수 값 가져오기
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
-        },
-        success: function() {
-            alert("댓글을 삭제 하시겠습니까 ?");
-            // 페이지 새로고침
-            location.reload();
-        },
-        error: function() {
-            alert("댓글 삭제에 실패했습니다.");
-            error
-        }
-    });
+    if (confirm("댓글을 삭제 하시겠습니까?")) {
+        $.ajax({
+            url: "/Board/Today/" + boardTodayId + "/Reply/" + replyId,
+            type: "DELETE",
+            // CSRF 변수 값 가져오기
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken); // 토큰 헤더에 같이 보내는 것
+            },
+            success: function() {
+                alert("댓글이 삭제되었습니다.");
+                // 페이지 새로고침
+                location.reload();
+            },
+            error: function() {
+                alert("댓글 삭제에 실패했습니다.");
+            }
+        });
+    } else {
+        // 삭제 취소
+        return false;
+    }
 });
 
 // 댓글 더보기
@@ -105,7 +108,7 @@ function moreReplies() {
             }
 
             for (var i = start; i < data.length && i < lastIndex + 6; i++) {
-                var html = "<tr class='reply-item'>" +
+                var html = "<tr class='reply-item''>" +
                            "<td>" + data[i].userName + "</td>" +
                            "<td>" + data[i].replyContent + "</td>" +
                            "<td>" + data[i].replyCreatedTime.replace("T", " ") + "</td>" +
@@ -132,3 +135,4 @@ function moreReplies() {
         }
     });
 }
+

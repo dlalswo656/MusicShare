@@ -26,7 +26,7 @@ public class TodayReplyService {
         return savedReply.getToday().getId();
     }
 
-    // 댓글 리스트
+    // 댓글 더보기 리스트
     public List<TodayReplyDTO> getTodayByBoardTodayId(Long boardTodayId) {
         List<TodayReplyEntity> todayReplyEntities = todayReplyRepository.findByTodayId(boardTodayId);
 

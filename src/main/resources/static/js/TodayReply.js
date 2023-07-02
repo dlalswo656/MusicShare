@@ -12,8 +12,8 @@ function submitTodayReply() {
 
     // 값들을 변수에 잘 가져오는 지 디버깅
     console.log('commentInput:', commentInput.val());
-    console.log("뭐가 문제니 ?" + userId);
-    console.log("뭐가 문제니 ?" + boardTodayId);
+    console.log("userId" + userId);
+    console.log("boardTodayId ?" + boardTodayId);
     console.log("유저 이름" + userName);
 
     // 비로그인 유저가 댓글 버튼을 누를 시 Login 페이지로

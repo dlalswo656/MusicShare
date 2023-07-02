@@ -38,6 +38,7 @@
     <div class="container mt-5">
         <a class="btn btn-primary" href="/Board/TodayWrite">글작성</a>
     </div>
+
     <!-- 페이징 -->
     <div class="container mt-5">
         <nav aria-label="Page navigation example">
@@ -48,11 +49,12 @@
                 <li class="page-item">
                     <a class="page-link" th:href="@{|${url}${currentPage - 1}|}" th:text="'‹'"></a>
                 </li>
-                <li class="page-item" th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page-1 == currentPage} ? active : ''">
+                <li class="page-item" th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page-1 == currentPage} ? active : ''" th:if="${page != 0}">
                     <a class="page-link" th:href="@{|${url}${page - 1}|}" th:text="${page}"></a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{|${url}${currentPage + 1}|}" th:text="'›'"></a>
+                    <a class="page-link" th:if="${currentPage + 1 < totalPages}" th:href="@{|${url}${currentPage + 1}|}" th:text="'›'"></a>
+                    <span th:unless="${currentPage + 1 < totalPages}" class="page-link text-muted">›</span>
                 </li>
                 <li class="page-item">
                     <a class="page-link" th:href="@{|${url}${totalPages - 1}|}" th:text="'»'"></a>
