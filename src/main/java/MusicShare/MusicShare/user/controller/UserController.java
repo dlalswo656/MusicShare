@@ -75,7 +75,7 @@ public class UserController {
 
     // 로그인
     @PostMapping("/User/Login")
-    public String Login(@ModelAttribute UserDTO userDTO, HttpSession session) {
+    public String Login(@ModelAttribute UserDTO userDTO, HttpSession session, Model model, Pageable pageable) {
         UserDTO LoginResult = userService.Login(userDTO);
         if(LoginResult != null) {
             // Login 성공 session 저장
@@ -85,6 +85,15 @@ public class UserController {
             session.setAttribute("LoginName", LoginResult.getName());
             session.setAttribute("LoginRole", LoginResult.getRole()); // 사용자의 역할 정보를 추가로 저장
             System.out.println("userId : " + LoginResult.getId());
+
+            Page<BoardTodayDTO> boardTodayDTOList = boardTodayService.findAll(pageable);
+            Page<MusicShareDTO> musicShareDTOList = musicShareService.findAll(pageable);
+            Page<BoardNoticeDTO> noticeDTOList = boardNoticeService.findAll(pageable);
+
+            model.addAttribute("boardTodayList", boardTodayDTOList);
+            model.addAttribute("musicShareList", musicShareDTOList);
+            model.addAttribute("boardNoticeList", noticeDTOList);
+
            return "index";
 
         } else {
