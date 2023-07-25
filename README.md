@@ -14,8 +14,9 @@
 5. 회원정보 수정 (유효성 검사)
 6. 비밀번호 찾기, 임시 비밀번호 발급
 7. 게시판 (유효성 검사)
-8. Security
-9. CSRF(토큰)
+8. 댓글 (jquery & javascript)
+9. Security
+10. CSRF(토큰)
 
 # 주요기능
 1. 비밀번호 암호화
@@ -24,4 +25,4 @@
 4. Security
 5. CSRF(토큰)
 6. 페이징 처리
-7. 댓글
+7. 댓글 (jquery & javascript)
